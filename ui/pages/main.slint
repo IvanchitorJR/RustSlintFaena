@@ -1,0 +1,40 @@
+import { welcomeFaena } from "welcome.slint";
+import { login } from "login.slint";
+import { register } from "register.slint";
+
+export component AuthUI inherits Window {
+    height: 640px;
+    width: 360px;
+    title: "Autenticación";
+
+    property <bool> welcome: true;
+    property <bool> is_login: false;
+    property <bool> is_register: false;
+
+    welcomeFaena {
+        visible: root.welcome;
+
+        go_to_login => {
+            root.welcome = false;
+            root.is_login = true;
+        }
+    }
+
+    login {
+        visible: root.is_login;
+
+        go_to_register => {
+            root.is_login = false;
+            root.is_register = true;
+        }
+    }
+
+    register {
+        visible: root.is_register;
+
+        go_to_login => {
+            root.is_register = false;
+            root.is_login = true;
+        }
+    }
+}

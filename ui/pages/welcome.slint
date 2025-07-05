@@ -1,0 +1,225 @@
+import { Styles } from "../Styles/styles.slint";
+import { VerticalBox } from "std-widgets.slint";
+export component welcomeFaena inherits Rectangle {
+
+    callback go_to_login;
+
+    height: 640px;
+    width: 360px;
+
+    background: Styles.welcomeGradient;
+
+    GridLayout {
+        padding: 15px;
+
+        Row {
+            Text {
+                text: "Bienvenido";
+                font-size: 59px;
+                height: 70px;
+                font-weight: Styles.bold;
+                vertical-alignment: top;
+                wrap: word-wrap;
+                color: Styles.blanco;
+            }
+        }
+        Row {
+            Text {
+                text: "a Faena";
+                font-size: 59px;
+                height: 130px;
+                font-weight: Styles.bold;
+                vertical-alignment: top;
+                wrap: word-wrap;
+                color: Styles.blanco;
+            }
+        }
+
+        Row {
+            Text {
+                text: "La plataforma que";
+                height: 50px;
+                width: 300px;
+                font-size: 33px;
+                font-weight: Styles.semibold;
+                //letter-spacing: 1px;
+                vertical-alignment: top;
+                wrap: word-wrap;
+                color: Styles.blanco;
+            }
+        }
+        Row {
+            Text {
+                text: "te otorga";
+                height: 50px;
+                width: 300px;
+                font-size: 33px;
+                font-weight: Styles.semibold;
+                //letter-spacing: 1px;
+                vertical-alignment: top;
+                wrap: word-wrap;
+                color: Styles.blanco;
+            }
+        }
+        Row {
+            Text {
+                text: "votaciones";
+                height: 50px;
+                width: 300px;
+                font-size: 33px;
+                font-weight: Styles.semibold;
+                //letter-spacing: 1px;
+                vertical-alignment: top;
+                wrap: word-wrap;
+                color: Styles.blanco;
+            }
+        }
+        Row {
+            Text {
+                text: "digitales de forma";
+                height: 50px;
+                width: 300px;
+                font-size: 33px;
+                font-weight: Styles.semibold;
+                //letter-spacing: 1px;
+                vertical-alignment: top;
+                wrap: word-wrap;
+                color: Styles.blanco;
+            }
+        }
+        Row {
+            Text {
+                text: "segura";
+                height: 95px;
+                width: 300px;
+                font-size: 33px;
+                font-weight: Styles.semibold;
+                //letter-spacing: 1px;
+                vertical-alignment: top;
+                wrap: word-wrap;
+                color: Styles.blanco;
+            }
+        }
+
+        Row {
+            HorizontalLayout {
+            alignment: end;
+            width: 320px;
+
+            Rectangle {
+                height: 51px;
+                width: 120px;
+                border-radius: 25px;
+                background: white;
+                drop-shadow-color: black;
+                drop-shadow-blur: 7px;
+
+                Text {
+                    text: "Siguiente";
+                    color: #364d7b;
+                    font-size: 16px;
+                    font-weight: 700;
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                }
+
+                    TouchArea {
+
+                        clicked => {
+                            root.go_to_login();
+                        }
+                    }
+                }  
+            }
+        }
+    }
+}
+
+/*import { Styles } from "../styles/styles.slint";
+import { VerticalBox } from "std-widgets.slint";
+export component welcomeFaena inherits Rectangle {
+
+    callback go_to_login;
+
+    height: 836px;
+    width: 425px;
+    background: Styles.welcomeGradient;
+
+    VerticalLayout {
+        padding: 16px;
+        y: 60px;
+        Rectangle { //bienvenido a faena text
+            height: 200px;
+            Text {
+                text: "Bienvenido";
+                font-size: 70px;
+                width: parent.width;
+                height: parent.height;
+                font-weight: Styles.black;
+                vertical-alignment: top;
+                color: Styles.blanco;
+            }
+
+            Rectangle {
+                width: parent.width;
+                height: 80px;
+
+                Text {
+                    text: "a Faena";
+                    font-size: 70px;
+                    color: Styles.blanco;
+                    font-weight: Styles.black;
+                    vertical-alignment: top;
+                    height: parent.height;
+                    width: parent.width;
+                }
+            }
+        }
+
+        Rectangle { //sub texto
+            height: 290px;
+            //background: green;
+
+            Text {
+                text: "La plataforma que te otorga votaciones digitales de forma segura";
+                height: parent.height;
+                width: parent.width;
+                font-size: 36px;
+                font-weight: Styles.bold;
+                letter-spacing: 1px;
+                vertical-alignment: top;
+                color: Styles.platino;
+            }
+        }
+
+        HorizontalLayout {
+            alignment: end;
+
+            Rectangle {
+                y: 130px;
+                height: 56px;
+                width: 128px;
+                border-radius: 50px;
+                background: white;
+                drop-shadow-color: black;
+                drop-shadow-blur: 4px;
+
+                Text {
+                    text: "Siguiente";
+                    color: Styles.azul-fuerte;
+                    font-size: 16px;
+                    font-weight: Styles.bold;
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                }
+
+                TouchArea {
+
+                    clicked => {
+                        root.go_to_login();
+                    }
+                }
+            }
+        }
+    }
+}*/

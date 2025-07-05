@@ -1,0 +1,486 @@
+import { LineEdit } from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+import { botonPrincipal } from "../components/boton-prinicipal.slint";
+import { inputRegistro } from "../components/input-registro.slint";
+
+export component login inherits Rectangle {
+    
+    callback go_to_register;
+
+    property <string> email: "";
+    property <string> pswd: "";
+
+    property <string> empty_error: "";
+    property <color> empty_error_text_color: #ff0000;
+    property <color> input_border_color: #e8e8e8;
+
+    width: 360px;
+    height: 640px;
+
+    background: white;
+
+    GridLayout {
+        padding: 15px;
+
+        Row {
+            Text {
+                text: "Faena";
+                font-size: 80px;
+                height: 95px;
+                font-weight: Styles.bold;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+                wrap: word-wrap;
+                color: Styles.azul-fuerte;
+            }
+        }
+        Row {
+            Image {
+                source: @image-url("../img/FAENApng.png");
+                height: 180px;
+            }
+        }
+        Row {
+            Text {
+                text: "Registrate o inicia sesión en la app para unirte a la Faenation";
+                font-size: 17px;
+                height: 52px;
+                font-weight: Styles.semibold;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+                wrap: word-wrap;
+                color: Styles.azul-bajo;
+            }
+        }
+
+        Row {
+            VerticalLayout {
+                spacing: 2px;
+                padding-top: 18px;
+
+                //Iniciar Sesión (Correo Electrónico)
+                inputRegistro {
+                    texto <=> root.email;
+                    placeholder: "Correo electronico";
+                    tipo: text;
+                }
+
+                //Iniciar Sesión (Contraseña)
+                inputRegistro {
+                    texto <=> root.pswd;
+                    placeholder: "Contraseña";
+                    tipo: password;
+                }
+            }
+        }
+
+        Row {
+            VerticalLayout {
+                spacing: 10px;
+                
+                //Errores
+                Rectangle {
+                    height: 13px;
+                    background: transparent;
+
+                    Text {
+                        text: root.empty_error;
+                        color: root.empty_error_text_color;
+                        horizontal-alignment: center;
+                        font-size: 14px;
+                        font-weight: Styles.semibold;
+                        width: parent.width;
+                    }
+                }
+
+                //Botón Iniciar Sesión
+                HorizontalLayout {
+                    alignment: center;
+
+                    botonPrincipal {
+                        texto: "Iniciar sesión";
+
+                        click => {
+                            if (root.email == "" || root.pswd == "") {
+                                root.empty_error = "Usuario y/o contraseña incorrectos";
+                                root.empty_error_text_color = #ff0000;
+                                root.input_border_color = #ff0000;
+                            } 
+                            else {
+                                root.empty_error = "Login exitoso";
+                                root.empty_error_text_color = #00aa00;
+                                root.input_border_color = #00aa00;
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+
+        Row {
+
+            //Link a registro
+            VerticalLayout {
+                spacing: 0px;
+                padding-top: 15px;
+
+                Text {
+                    text: "¿Aún no tienes cuenta?";
+                    height: 19px;
+                    font-size: 14px;
+                    color: Styles.negro;
+                    font-weight: Styles.semibold;
+                    horizontal-alignment: left;
+                }
+
+                TouchArea {
+                    height: 18px;
+
+                    clicked => { 
+                        root.go_to_register(); 
+                    }
+
+                    Text {
+                        width: parent.width;
+                        height: 19px;
+                        text: "Crear una cuenta";
+                        font-size: 14px;
+                        font-weight: Styles.semibold;
+                        color: Styles.azul-verde;
+                        horizontal-alignment: left;        
+                    }
+                }
+            }
+        }
+    }
+
+    /*VerticalLayout {
+        padding: 30px;
+        spacing: 32px;
+
+        Rectangle {
+            height: 280px;
+
+            Text {
+                text: "Faena";
+                font-size: 65px;
+                font-weight: 900;
+                font-family: "Source Sans Pro";
+                color: #364d7b;
+                height: parent.height;
+                width: parent.width;
+                horizontal-alignment: center;
+                vertical-alignment: top;
+            }
+
+            Image {
+                source: @image-url("../img/FAENApng.png");
+            }
+
+            Text {
+                text: "Regístrate o inicia sesión en la app para unirte a la Faenation";
+                horizontal-alignment: center;
+                vertical-alignment: bottom;
+                height: parent.height;
+                width: parent.width;
+                font-size: 16px;
+                color: #6a95b3;
+                font-weight: 500;
+                wrap: word-wrap;
+            }
+        }
+
+        //Iniciar Sesión (Correo Electrónico)
+        VerticalLayout {
+            spacing: 10px;
+
+            //Errores
+            Rectangle {
+                height: 15px;
+                background: transparent;
+
+                Text {
+                    text: root.empty_error;
+                    color: root.empty_error_text_color;
+                    horizontal-alignment: left;
+                    font-size: 10px;
+                    font-weight: 500;
+                    width: parent.width;
+                }
+            }
+
+            //Iniciar Sesión (Correo Electrónico)
+            Rectangle {
+                height: 40px;
+                border-width: 2px;
+                border-color: root.input_border_color;
+                border-radius: 10px;
+                background: #b5b8bb;
+
+                /*Text {
+                    text: "Correo electrónico";
+                    font-size: 16px;
+                    color: #e8e8e8;
+                }*/
+
+                LineEdit {
+                    text <=> root.email;
+                    width: 100%;
+                    height: 40px;
+                    font-size: 16px;
+                    horizontal-alignment: center;
+                    placeholder-text: "Correo electrónico";
+                    input-type: text;
+                }
+            }
+
+            //Iniciar Sesión (Contraseña)
+            Rectangle {
+                height: 40px;
+                border-width: 2px;
+                border-color: root.input_border_color;
+                border-radius: 10px;
+                background: #b5b8bb;
+
+                /*Text {
+                    text: "Contraseña";
+                    font-size: 16px;
+                    color: #e8e8e8;
+                }*/
+
+                LineEdit {
+                    text <=> root.pswd;
+                    width: 100%;
+                    height: 40px;
+                    font-size: 16px;
+                    horizontal-alignment: center;
+                    placeholder-text: "Contraseña";
+                    input-type: password;
+                }
+            }
+
+            Rectangle {
+                background: transparent;
+                height: 20px;
+            }
+
+            //Botón Iniciar Sesión
+            VerticalLayout {
+                padding-left: 30px;
+                padding-right: 30px;
+
+                Rectangle {
+                    height: 40px;
+                    background: #6a95b3;
+                    border-radius: 10px;
+                    drop-shadow-color: black;
+                    drop-shadow-blur: 4px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+
+                    TouchArea {
+                        clicked => {
+                            if (root.email == "" || root.pswd == "") {
+                                root.empty_error = "Usuario y/o contraseña incorrectos";
+                                root.empty_error_text_color = #ff0000;
+                                root.input_border_color = #ff0000;
+                            } 
+                            else {
+                                root.empty_error = "Login exitoso";
+                                root.empty_error_text_color = #00aa00;
+                                root.input_border_color = #00aa00;
+                            } 
+                        }
+
+                        Text {
+                            text: "Iniciar Sesión";
+                            color: black;
+                            font-size: 16px;
+                            font-weight: 700;
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+            }
+
+            //Link a registro
+            VerticalLayout {
+
+                Text {
+                    text: "¿Aún no tienes cuenta?";
+                    height: 18px;
+                    font-size: 14px;
+                    color: black;
+                    font-weight: 500;
+                    horizontal-alignment: left;
+                }
+
+                TouchArea {
+                    height: 18px;
+
+                    clicked => { 
+                        root.go_to_register(); 
+                    }
+
+                    Text {
+                        width: parent.width;
+                        height: 18px;
+                        text: "Crear una cuenta";
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: #6a95b3;
+                        horizontal-alignment: left;
+                    }
+                }
+            }
+        }
+    }*/
+}
+
+/*import { LineEdit, VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+import { botonPrincipal } from "../components/boton-prinicipal.slint";
+import { inputRegistro } from "../components/input-registro.slint";
+
+export component login inherits Rectangle {
+    
+    callback go_to_register;
+
+    property <string> email: "";
+    property <string> pswd: "";
+
+    property <string> empty_error: "";
+    property <color> empty_error_text_color: #ff0000;
+    property <color> input_border_color: #e8e8e8;
+
+    height: 836px;
+    width: 425px;
+
+    background: Styles.blanco;
+
+    VerticalLayout {
+        padding: 30px;
+        spacing: 32px;
+        y: 10px;
+
+        Rectangle {
+            height: 280px;
+            Text {
+                text: "Faena";
+                font-size: 96px;
+                font-weight: Styles.black;
+                font-family: "Source Sans Pro";
+                color: Styles.azul-fuerte;
+                height: parent.height;
+                width: parent.width;
+                horizontal-alignment: center;
+                vertical-alignment: top;
+            }
+            Rectangle {
+                y: 40px;
+                Image {
+                    height: 177px;
+                    width: 177px;
+                    source: @image-url("../img/FAENApng.png");
+                }
+            }
+            Rectangle {
+                y: 40px;
+                Text {
+                    text: "Regístrate o inicia sesión en la app para unirte a la Faenation";
+                    horizontal-alignment: center;
+                    vertical-alignment: bottom;
+                    height: parent.height;
+                    width: parent.width;
+                    font-size: 20px;
+                    color: Styles.azul-bajo;
+                    font-weight: Styles.bold;
+                }
+            }
+        }
+
+        //Iniciar Sesión (Correo Electrónico)
+        VerticalLayout {
+            spacing: 30px;
+            padding-top: 50px;
+
+            //Iniciar Sesión (Correo Electrónico)
+            inputRegistro {
+                texto <=> root.email;
+                placeholder: "Correo electronico";
+                tipo: text;
+            }
+
+            //Iniciar Sesión (Contraseña)
+            inputRegistro {
+                texto <=> root.pswd;
+                placeholder: "Contraseña";
+                tipo: password;
+            }
+            //Errores
+            Rectangle {
+                height: 15px;
+                background: transparent;
+                Text {
+                    text: root.empty_error;
+                    color: root.empty_error_text_color;
+                    horizontal-alignment: center;
+                    font-size: 16px;
+                    font-weight: Styles.semibold;
+                    width: parent.width;
+                }
+            }
+            //Botón Iniciar Sesión
+            HorizontalLayout {
+                alignment: center;
+                botonPrincipal {
+                    texto: "Iniciar sesión";
+                    click => {
+                            if (root.email == "" || root.pswd == "") {
+                                root.empty_error = "Usuario y/o contraseña incorrectos";
+                                root.empty_error_text_color = #ff0000;
+                                root.input_border_color = #ff0000;
+                            } 
+                            else {
+                                root.empty_error = "Login exitoso";
+                                root.empty_error_text_color = #00aa00;
+                                root.input_border_color = #00aa00;
+                            } 
+                        }
+                }
+            }
+
+            //Link a registro
+            VerticalLayout {
+                spacing: 10px;
+                Text {
+                    text: "¿Aún no tienes cuenta?";
+                    height: 18px;
+                    font-size: 20px;
+                    color: Styles.negro;
+                    font-weight: Styles.semibold;
+                    horizontal-alignment: left;
+                }
+
+                TouchArea {
+                    height: 18px;
+
+                    clicked => { 
+                        root.go_to_register(); 
+                    }
+
+                    Text {
+                        width: parent.width;
+                        height: 18px;
+                        text: "Crear una cuenta";
+                        font-size: 20px;
+                        font-weight: Styles.semibold;
+                        color: Styles.azul-verde;
+                        horizontal-alignment: left;        
+                    }
+                }
+            }
+        }
+    }
+}*/

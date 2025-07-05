@@ -1,0 +1,36 @@
+import { Button, StyleMetrics } from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+export component botonPrincipal{
+
+    callback click();
+
+    in property <string> texto;
+
+    width: 150px;
+    height: 45px;
+
+    Rectangle {
+        background: Styles.azul-verde;
+        border-radius: 16px;
+        drop-shadow-color: black;
+        drop-shadow-blur: 4px;
+
+        Button {
+            width: root.width;
+            height: root.height;
+
+            clicked => {
+                root.click();
+            }
+        }
+
+        Text {
+            text: texto;
+            font-size: 18px;
+            font-weight: Styles.semibold;
+            color: Styles.negro;
+            vertical-alignment: top;
+            horizontal-alignment: center;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+
+import { Button } from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+
+export component botonRecyclerVotaciones{
+    width: 351px;
+    height: 37px;
+    Rectangle {
+        background: Styles.azul-verde;
+        border-radius: 10px;
+        width: parent.width;
+        height: parent.height;
+        Button {
+            width: parent.width;
+            height: parent.height;
+            clicked => {
+                debug("click");
+            }
+        }
+        Text {
+            text: "Votacion 1";
+            font-size: 15px;
+            font-weight: Styles.black;
+            font-family: "Source Sans Pro";
+            color: Styles.blanco;
+            horizontal-alignment: left;
+            vertical-alignment: center;
+            width: parent.width;
+            height: parent.height;
+            x: 10px; //margin para que comienze antes
+        }
+    }
+}

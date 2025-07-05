@@ -1,0 +1,28 @@
+import { LineEdit, HorizontalBox } from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+
+export component inputRegistro {
+    in-out property <string> texto:"";
+    in property <string> placeholder;
+    in property <InputType> tipo;
+    HorizontalBox { //box para centrar el contenido
+                alignment: center;
+            Rectangle {
+                width: 272px;
+                height: 40px;
+                border-width: 2px;
+                border-color: Styles.gris;
+                border-radius: 10px;
+                background: #c5c5c5;
+                LineEdit {
+                    text <=> root.texto;
+                    width: 100%;
+                    height: 40px;
+                    font-size: 16px;
+                    horizontal-alignment: center;
+                    placeholder-text: placeholder;
+                    input-type: tipo;
+                }
+            }
+            }
+}

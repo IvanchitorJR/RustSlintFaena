@@ -1,0 +1,117 @@
+import { Styles } from "../styles/styles.slint";
+
+export component Navbar inherits Rectangle {
+    width: 365px;
+    height: 64px;
+    background: Styles.azul-bajo;
+
+    property <int> indiceAzulFuerte: 0;
+
+    //Indice azul fuerte
+    Rectangle {
+        width: parent.width / 6;
+        height: parent.height / 2.2;
+        y: 8px;
+        x: (parent.width / 3) * root.indiceAzulFuerte + (parent.width / 3 - parent.width / 6) / 2;
+        border-radius: 16px;
+        background: Styles.azul-fuerte;
+    }
+    
+
+    HorizontalLayout {
+        //spacing: 0;
+
+        Rectangle {
+            width: parent.width / 3;
+            height: parent.height;
+
+            TouchArea {
+                width: parent.width;
+                height: parent.height;
+                clicked => {
+                    root.indiceAzulFuerte = 0;
+                    debug("Click en Historial");
+                }
+            }
+
+            Image {
+                source: @image-url("../img/folder.png");
+                y: 10px;
+                //horizontal-alignment: center;
+            }
+
+            Text {
+                text: "Historial";
+                color: white;
+                vertical-alignment: bottom;
+                horizontal-alignment: center;
+                font-size: 16px;
+                font-weight: 600;
+                width: parent.width;
+                y: 38px;
+            }
+        }
+
+        Rectangle {
+            width: parent.width / 3;
+            height: parent.height;
+
+            TouchArea {
+                width: parent.width;
+                height: parent.height;
+                clicked => {
+                    root.indiceAzulFuerte = 1;
+                    debug("Click en Ver Salas");
+                }
+            }
+
+            Image {
+                source: @image-url("../img/list.png");
+                y: 10px;
+                //horizontal-alignment: center;
+            }
+
+            Text {
+                text: "Ver Salas";
+                color: white;
+                vertical-alignment: bottom;
+                horizontal-alignment: center;
+                font-size: 16px;
+                font-weight: 600;
+                width: parent.width;
+                y: 38px;
+            }
+        }
+
+        Rectangle {
+            width: parent.width / 3;
+            height: parent.height;
+
+            TouchArea {
+                width: parent.width;
+                height: parent.height;
+                clicked => {
+                    root.indiceAzulFuerte = 2;
+                    debug("Click en Crear Sala");
+                }
+            }
+
+            Image {
+                source: @image-url("../img/add_circle.png");
+                y: 10px;
+                //horizontal-alignment: center;
+            }
+
+            Text {
+                text: "Crear Sala";
+                color: white;
+                vertical-alignment: bottom;
+                horizontal-alignment: center;
+                font-size: 16px;
+                font-weight: 600;
+                width: parent.width;
+                y: 38px;
+            }
+        }
+    }
+}

@@ -1,0 +1,347 @@
+import { LineEdit, VerticalBox, StyleMetrics } from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+import { inputRegistro } from "../components/input-registro.slint";
+import { botonPrincipal } from "../components/boton-prinicipal.slint";
+
+export component register inherits Rectangle {
+
+    callback go_to_login;
+
+    property <string> username: "";
+    property <string> email: "";
+    property <string> pswd: "";
+    property <string> confirm_pswd: "";
+
+    property <string> empty_error: "";
+    property <color> empty_error_text_color: #ff0000;
+    property <color> input_border_color: #e8e8e8;
+
+    width: 360px;
+    height: 640px;
+
+    background: white;
+
+    GridLayout {
+        padding: 15px;
+
+        Row {
+            Text {
+                text: "Faena";
+                font-size: 80px;
+                height: 95px;
+                font-weight: Styles.bold;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+                wrap: word-wrap;
+                color: Styles.azul-fuerte;
+            }
+        }
+        Row {
+            Image {
+                source: @image-url("../img/FAENApng.png");
+                height: 125px;
+            }
+        }
+        Row {
+            Text {
+                text: "Ingresa tus datos";
+                font-size: 19px;
+                height: 27px;
+                font-weight: Styles.bold;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+                wrap: word-wrap;
+                color: Styles.negro;
+            }
+        }
+
+        Row {
+            VerticalLayout {
+                spacing: 2px;
+                padding-top: 2px;
+
+                //Iniciar Sesión (Correo Electrónico)
+                inputRegistro {
+                    texto <=> root.username;
+                    placeholder: "Nombre de Usuario";
+                    tipo: text;
+                }
+
+                //Iniciar Sesión (Contraseña)
+                inputRegistro {
+                    texto <=> root.email;
+                    placeholder: "Correo Electrónico";
+                    tipo: password;
+                }
+            }
+        }
+
+        Row {
+            VerticalLayout {
+                spacing: 2px;
+                padding-top: 2px;
+
+                //Iniciar Sesión (Correo Electrónico)
+                inputRegistro {
+                    texto <=> root.pswd;
+                    placeholder: "Contraseña";
+                    tipo: text;
+                }
+
+                //Iniciar Sesión (Contraseña)
+                inputRegistro {
+                    texto <=> root.confirm_pswd;
+                    placeholder: "Confirmar Contraseña";
+                    tipo: password;
+                }
+            }
+        }
+
+        Row {
+            VerticalLayout {
+                spacing: 10px;
+
+                //Errores
+                Rectangle {
+                    height: 13px;
+                    background: transparent;
+
+                    Text {
+                        text: root.empty_error;
+                        color: root.empty_error_text_color;
+                        horizontal-alignment: center;
+                        font-size: 14px;
+                        font-weight: Styles.semibold;
+                        width: parent.width;
+                    }
+                }
+
+                //Botón Registrarse
+                HorizontalLayout {
+                    alignment: center;
+
+                    botonPrincipal {
+                        texto: "Crear cuenta";
+
+                        click => {
+                            if (root.username == "" || root.email == "" || root.pswd == "" || root.confirm_pswd == "") {
+                                    root.empty_error = "No puede haber campos vacíos";
+                                    root.empty_error_text_color = #ff0000;
+                                    root.input_border_color = #ff0000;
+                            }
+                            else if (root.pswd != root.confirm_pswd) {
+                                    root.empty_error = "Las contraseñas no coinciden";
+                                    root.empty_error_text_color = #ff0000;
+                                    root.input_border_color = #ff0000;
+                            }
+                            else {
+                                    root.empty_error = "Cuenta creada exitosamente";
+                                    root.empty_error_text_color = #00aa00;
+                                    root.input_border_color = #00aa00;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Row {
+
+            //Link a registro
+            VerticalLayout {
+                spacing: 0px;
+                padding-top: 15px;
+
+                Text {
+                    text: "¿Ya tienes cuenta?";
+                    height: 19px;
+                    font-size: 14px;
+                    color: Styles.negro;
+                    font-weight: Styles.semibold;
+                    horizontal-alignment: left;
+                }
+
+                TouchArea {
+                    height: 18px;
+
+                    clicked => { 
+                        root.go_to_login(); 
+                    }
+
+                    Text {
+                        width: parent.width;
+                        height: 19px;
+                        text: "Iniciar Sesión";
+                        font-size: 14px;
+                        font-weight: Styles.semibold;
+                        color: Styles.azul-verde;
+                        horizontal-alignment: left;        
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*import { LineEdit, VerticalBox, StyleMetrics } from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+import { inputRegistro } from "../components/input-registro.slint";
+import { botonPrincipal } from "../components/boton-prinicipal.slint";
+
+export component register inherits Rectangle {
+
+    callback go_to_login;
+
+    property <string> username: "";
+    property <string> email: "";
+    property <string> pswd: "";
+    property <string> confirm_pswd: "";
+
+    property <string> empty_error: "";
+    property <color> empty_error_text_color: #ff0000;
+    property <color> input_border_color: #e8e8e8;
+
+    height: 836px;
+    width: 425px;
+
+    background: Styles.blanco;
+
+    VerticalLayout {
+        padding: 20px;
+        spacing: 20px;
+
+        Rectangle {
+            height: 200px;
+            background: white;
+            Text {
+                text: "Faena";
+                font-size: 96px;
+                font-weight: Styles.black;
+                font-family: "Source Sans Pro";
+                color: Styles.azul-fuerte;
+                height: parent.height;
+                width: parent.width;
+                horizontal-alignment: center;
+                vertical-alignment: top;
+            }
+            Rectangle {
+                y: 60px;
+                Image {
+                source: @image-url("../img/FAENApng.png");
+                width: 102px;
+                height: 102px;
+                }
+            }
+            Rectangle {
+                y: 30px;
+                Text {
+                text: "Ingresa tus datos";
+                horizontal-alignment: center;
+                vertical-alignment: bottom;
+                height: parent.height;
+                width: parent.width;
+                font-size: 20px;
+                color: Styles.negro;
+                font-weight: Styles.bold;
+            }
+            }
+        }
+        //Formulario de registro (inputs)
+        VerticalLayout {
+            padding-top: 60px;
+            spacing: 30px;
+
+            //Registrarse (Nombre de Usuario)
+            inputRegistro {
+                placeholder: "Nombre de Usuario";
+                texto <=> root.username;
+                tipo: text;
+            }
+
+            //Registrarse (Correo Electrónico)
+            inputRegistro {
+                placeholder: "Correo Electrónico";
+                texto <=> root.email;
+                tipo: text;
+            }
+
+            //Registrarse (Contraseña)
+            inputRegistro {
+                placeholder: "Contraseña";
+                texto <=> root.pswd;
+                tipo: password;
+            }
+
+            //Registrarse (Confirmar Contraseña)
+            inputRegistro {
+                placeholder: "Confirmar Contraseña";
+                texto <=> root.confirm_pswd;
+                tipo: password;
+            }
+        }
+        VerticalLayout {
+            spacing: 10px;
+            //Errores
+            Rectangle {
+                background: transparent;
+
+                Text {
+                    text: root.empty_error;
+                    color: root.empty_error_text_color;
+                    horizontal-alignment: center;
+                    font-size: 16px;
+                    font-weight: Styles.semibold;
+                    width: parent.width;
+                }
+            }
+            //Botón Registro
+            HorizontalLayout {
+                alignment: center;
+                botonPrincipal {
+                    texto: "Crear cuenta";
+                    click => {
+                        if (root.username == "" || root.email == "" || root.pswd == "" || root.confirm_pswd == "") {
+                                root.empty_error = "No puede haber campos vacíos";
+                                root.empty_error_text_color = #ff0000;
+                                root.input_border_color = #ff0000;
+                            }
+                            else if (root.pswd != root.confirm_pswd) {
+                                root.empty_error = "Las contraseñas no coinciden";
+                                root.empty_error_text_color = #ff0000;
+                                root.input_border_color = #ff0000;
+                            }
+                            else {
+                                root.empty_error = "Cuenta creada exitosamente";
+                                root.empty_error_text_color = #00aa00;
+                                root.input_border_color = #00aa00;
+                            }
+                    }
+                }
+            }
+
+            //Link a login
+            VerticalLayout {
+                spacing: 2px;
+                Text {
+                    text: "¿Ya tienes cuenta?";
+                    font-size: 20px;
+                    color: Styles.negro;
+                    font-weight: Styles.semibold;
+                }
+                TouchArea {
+                    clicked => { 
+                        root.go_to_login(); 
+                    }
+                    Text {
+                        text: "Iniciar sesión";
+                        font-size: 20px;
+                        font-weight: Styles.semibold;
+                        color: Styles.azul-verde;
+                        horizontal-alignment: left;
+                        width: parent.width;
+                    }
+                }
+            }
+        }
+    }
+}*/

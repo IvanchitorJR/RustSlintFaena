@@ -1,0 +1,19 @@
+export global Styles { //Estilos globales para la app
+    //Out property es una propiedad que se puede usar en otros componentes, por así decirlo
+    out property <length> margin: 16px; //Margen que pueden usar otros componentes
+    out property <brush> fun-gradient: @linear-gradient(0deg, #d2ff52 0%,#91e842 70%); //Degradado que pueden usar otros componentes
+    out property <brush> welcomeGradient: @linear-gradient(0deg, #6a95b3 5%, #364d7b 100%); //Degradado para la pantalla de bienvenida
+    //colores
+    out property <brush> azul-fuerte: #364D7B;
+    out property <brush> azul-bajo: #6A95B3;
+    out property <brush> azul-verde: #109DC4;
+    out property <brush> platino: #E8E8E8;
+    out property <brush> blanco: #FFFFFF;
+    out property <brush> negro: #000000;
+    out property <brush> gris: #909097;
+    //peso
+    out property <int> bold: 700;
+    out property <int> semibold: 600;
+    out property <int> normal: 400;
+    out property <int> black: 900;
+}
