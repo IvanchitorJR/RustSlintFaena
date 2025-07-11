@@ -4,13 +4,13 @@ export component welcomeFaena inherits Rectangle {
 
     callback go_to_login;
 
-    height: 640px;
-    width: 360px;
-
     background: Styles.welcomeGradient;
 
     GridLayout {
-        padding: 15px;
+        padding-top: 35px;
+        padding-left: 25px;
+        padding-right: 25px;
+        //padding-bottom: 25px;
 
         Row {
             Text {
@@ -27,7 +27,7 @@ export component welcomeFaena inherits Rectangle {
             Text {
                 text: "a Faena";
                 font-size: 59px;
-                height: 130px;
+                height: 150px;
                 font-weight: Styles.bold;
                 vertical-alignment: top;
                 wrap: word-wrap;
@@ -90,7 +90,7 @@ export component welcomeFaena inherits Rectangle {
         Row {
             Text {
                 text: "segura";
-                height: 95px;
+                height: 170px;
                 width: 300px;
                 font-size: 33px;
                 font-weight: Styles.semibold;
@@ -105,6 +105,7 @@ export component welcomeFaena inherits Rectangle {
             HorizontalLayout {
             alignment: end;
             width: 320px;
+            padding-right: 10px;
 
             Rectangle {
                 height: 51px;

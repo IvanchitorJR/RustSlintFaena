@@ -1,6 +1,46 @@
 import { Button, StyleMetrics } from "std-widgets.slint";
 import { Styles } from "../styles/styles.slint";
-export component botonPrincipal{
+
+export component botonPrincipal {
+
+    in property <string> texto;
+    
+    callback click();
+
+    width: 150px;
+    height: 45px;
+
+    TouchArea {
+        width: parent.width;
+        height: parent.height;
+
+        clicked => {
+            root.click();
+        }
+
+        Rectangle {
+            width: parent.width;
+            height: parent.height;
+            background: Styles.azul-verde;
+            border-radius: 16px;
+            drop-shadow-color: black;
+            drop-shadow-blur: 4px;
+
+            Text {
+                text: root.texto;
+                font-size: 18px;
+                font-weight: Styles.semibold;
+                color: Styles.negro;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+                width: parent.width;
+                height: parent.height;
+            }
+        }
+    }
+}
+
+/*export component botonPrincipal{
 
     callback click();
 
@@ -33,4 +73,4 @@ export component botonPrincipal{
             horizontal-alignment: center;
         }
     }
-}
+}*/
