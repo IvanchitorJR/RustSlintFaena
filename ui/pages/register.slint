@@ -57,18 +57,18 @@ export component register inherits Rectangle {
                 spacing: 2px;
                 padding-top: 2px;
 
-                //Iniciar Sesión (Correo Electrónico)
+                //Nombre de usuario
                 inputRegistro {
                     texto <=> root.username;
                     placeholder: "Nombre de Usuario";
                     tipo: text;
                 }
 
-                //Iniciar Sesión (Contraseña)
+                //Correo electronico
                 inputRegistro {
                     texto <=> root.email;
                     placeholder: "Correo Electrónico";
-                    tipo: password;
+                    tipo: text;
                 }
             }
         }
@@ -78,14 +78,14 @@ export component register inherits Rectangle {
                 spacing: 2px;
                 padding-top: 2px;
 
-                //Iniciar Sesión (Correo Electrónico)
+                //Password
                 inputRegistro {
                     texto <=> root.pswd;
                     placeholder: "Contraseña";
-                    tipo: text;
+                    tipo: password;
                 }
 
-                //Iniciar Sesión (Contraseña)
+                //Password repetidoa
                 inputRegistro {
                     texto <=> root.confirm_pswd;
                     placeholder: "Confirmar Contraseña";
