@@ -1,6 +1,7 @@
 import { welcomeFaena } from "welcome.slint";
 import { login } from "login.slint";
 import { register } from "register.slint";
+import { Styles } from "../Styles/styles.slint";
 
 export component MainWindow inherits Window {
     
@@ -9,6 +10,19 @@ export component MainWindow inherits Window {
     property <bool> welcome: true;
     property <bool> is_login: false;
     property <bool> is_register: false;
+
+    //login
+    in-out property <string> email: "";
+    in-out property <string> pswd: "";
+    in-out property <string> empty_error: "";
+    in-out property <color> empty_error_text_color: Styles.empty_error_text_color;
+    in-out property <color> input_border_color: Styles.input_border_color;
+    
+    out property <color> rojo: Styles.empty_error_text_color;
+    out property <color> verde: Styles.verde;
+    out property <color> border: Styles.input_border_color;
+    // Callback del login
+    callback login();
 
     welcomeFaena {
         visible: root.welcome;
@@ -19,12 +33,20 @@ export component MainWindow inherits Window {
         }
     }
 
-    login {
+    login_page:=login {
         visible: root.is_login;
-
+        //bindings
+        email <=> root.email;
+        pswd <=> root.pswd;
+        empty_error <=> root.empty_error;
+        empty_error_text_color <=> root.empty_error_text_color;
+        input_border_color <=> root.input_border_color;
         go_to_register => {
             root.is_login = false;
             root.is_register = true;
+        }
+        login =>{
+            root.login();
         }
     }
 
