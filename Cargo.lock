@@ -3,6 +3,18 @@
 version = 4
 
 [[package]]
+name = "Faena"
+version = "0.1.0"
+dependencies = [
+ "reqwest",
+ "serde",
+ "serde_json",
+ "slint",
+ "slint-build",
+ "tokio",
+]
+
+[[package]]
 name = "ab_glyph"
 version = "0.2.31"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4237,18 +4249,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "spin_on",
-]
-
-[[package]]
-name = "slint_android_hello"
-version = "0.1.0"
-dependencies = [
- "reqwest",
- "serde",
- "serde_json",
- "slint",
- "slint-build",
- "tokio",
 ]
 
 [[package]]

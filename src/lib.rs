@@ -21,7 +21,7 @@ pub async fn android_main(app: slint::android::AndroidApp) {
     let ui = MainWindow::new().unwrap();
     let client = reqwest::Client::new(); //cliente http que provee reqwest
     //Boton de login al activarse en login.slint
-    ui.on_login({  
+    ui.on_login({
         let ui_handle = ui.as_weak(); //se hace una variable para tener la ui en el scope actual
         move || { //closure (lo que conocemos como listener)
             let ui_instance = ui_handle.unwrap(); 

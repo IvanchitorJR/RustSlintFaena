@@ -1,5 +1,5 @@
 [package]
-name = "slint_android_hello"
+name = "Faena"
 version = "0.1.0"
 edition = "2021"
 build = "build.rs"
@@ -18,12 +18,13 @@ serde_json = "1.0"
 slint-build = "1.3.2"
 
 [package.metadata.android]
-package = "com.example.slint"
-label = "Slint Hello"
+package = "com.example.faena"
+label = "FaenaJala"  # Usa el mismo nombre que en tu manifest
 target-sdk-version = 30
 min-sdk-version = 24
-build-target = "aarch64-linux-android"
+build-targets = ["aarch64-linux-android"]
 assets = "assets"
+resources = "android/res" 
 
 [package.metadata.android.signing.debug]
 path = ".debug.keystore"
