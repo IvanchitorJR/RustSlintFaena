@@ -5,13 +5,15 @@ import { Navbar } from "../components/navbar.slint";
 import { ScrollView } from "std-widgets.slint";
 
 export component startMenu inherits Rectangle {
-    //width: 100%;
-    //height: 100%;
     background: Styles.azul-fuerte;
 
     callback go_to_startMenu;
+    callback go_to_visualizeRoomMember;
 
     property <string> user: "UsuarioX";
+
+    property <string> empty_error: "";
+    property <color> empty_error_text_color: #ff0000;
 
     VerticalLayout {
         spacing: 0px;
@@ -49,7 +51,7 @@ export component startMenu inherits Rectangle {
                             background: Styles.blanco;
                             border-radius: 10px;
 
-                            LineEdit {
+                            codigo := LineEdit {
                                 height: 45px;
                                 width: 100%;
                                 placeholder-text: "Código";
@@ -72,7 +74,15 @@ export component startMenu inherits Rectangle {
                             }
 
                             clicked => {
-                                debug("Ingresando...");
+                                
+                                if (codigo.text == "") {
+                                    root.empty_error = "Hubo un error con el código ingresado";
+                                    root.empty_error_text_color = #ff0000;
+                                }
+                                else {
+                                    debug("Ingresando con código: " + codigo.text);
+                                    root.empty_error = "";
+                                }
                             }
                         }
                     }
@@ -89,6 +99,15 @@ export component startMenu inherits Rectangle {
 
                 Rectangle {
                     height: 25px;
+
+                    Text {
+                        text: root.empty_error;
+                        font-size: 12px;
+                        font-weight: Styles.semibold;
+                        width: parent.width;
+                        color: root.empty_error_text_color;
+                        horizontal-alignment: left;
+                    }
                 }
 
                 Row {
@@ -105,6 +124,8 @@ export component startMenu inherits Rectangle {
                     width: 100%;
                     viewport-width: 0px;
                     viewport-height: 500px;
+
+                    vertical-scrollbar-policy: always-off;
 
                     VerticalLayout {
                         spacing: 8px;
@@ -139,6 +160,8 @@ export component startMenu inherits Rectangle {
                     viewport-width: 0px;
                     viewport-height: 500px;
 
+                    vertical-scrollbar-policy: always-off;
+
                     VerticalLayout {
                         spacing: 8px;
 
@@ -147,7 +170,11 @@ export component startMenu inherits Rectangle {
                             opacity: 0;
                         }
 
-                        botonRecyclerSalas {}
+                        botonRecyclerSalas {
+                            go_to_visualizeRoomMember => {
+                                root.go_to_visualizeRoomMember();
+                            }
+                        }
                     }
                 }
             }

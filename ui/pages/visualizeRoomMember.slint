@@ -1,0 +1,83 @@
+import { Styles } from "../styles/styles.slint";
+import { Navbar } from "../components/navbar.slint";
+import { botonRecyclerVotaciones } from "../components/boton-recycler-votaciones.slint";
+
+export component visualizeRoomMember inherits Rectangle {
+    background: Styles.azul-fuerte;
+
+    property <string> room_name: "Sala X";
+
+    callback go_to_visualizeRoomMember;
+
+    VerticalLayout {
+        spacing: 0px;
+        height: 100%;
+        padding: 25px;
+
+        VerticalLayout {
+            //padding: 25px;
+            spacing: 20px;
+
+            Text {
+            text: root.room_name;
+            font-size: 45px;
+            font-weight: 800;
+            height: 58px;
+            color: white;
+        }
+
+        Rectangle {
+            background: Styles.azul-bajo;
+            height: 180px;
+            //width: 351px;
+            border-radius: 10px;
+
+            VerticalLayout {
+                spacing: 5px;
+
+                Rectangle {
+                    padding: 5px;
+                    height: 50px;
+
+                    Text {
+                        text: "Nombre de Sala: " + root.room_name;
+                        font-size: 16px;
+                        horizontal-alignment: left;
+                        width: parent.width;
+                        x: 6px;
+                    }
+                }
+                
+                Rectangle {
+                    padding: 5px;
+                    height: 50px;
+
+                    Text {
+                        text: "Descripción de Sala: ";
+                        font-size: 16px;
+                        horizontal-alignment: left;
+                        width: parent.width;
+                        x: 6px;
+                    }
+                }
+            }
+        }
+
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            
+        }
+
+        Rectangle {
+            height: 100px;
+        }
+    }
+
+    VerticalLayout {
+        alignment: end;
+        Navbar {}
+    }
+}

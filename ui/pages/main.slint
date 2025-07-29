@@ -3,6 +3,7 @@ import { login } from "login.slint";
 import { register } from "register.slint";
 import { Navbar } from "../components/navbar.slint";
 import { startMenu } from "startMenu.slint";
+import { visualizeRoomMember } from "visualizeRoomMember.slint";
 import { Styles } from "../Styles/styles.slint";
 
 export component MainWindow inherits Window {
@@ -14,6 +15,7 @@ export component MainWindow inherits Window {
     property <bool> is_register: false;
 
     property <bool> is_startMenu: false;
+    property <bool> is_visualizeRoomMember: false;
 
     //login
     in-out property <string> email: "";
@@ -57,14 +59,24 @@ export component MainWindow inherits Window {
             root.login();
         }
 
-        go_to_voteRooms => {
+        go_to_startMenu => {
             root.is_login = false;
             root.is_startMenu = true;
         }
+        
     }
 
     startMenu {
         visible: root.is_startMenu;
+
+        go_to_visualizeRoomMember => {
+            root.is_startMenu = false;
+            root.is_visualizeRoomMember = true;
+        }
+    }
+
+    visualizeRoomMember {
+        visible: root.is_visualizeRoomMember;
     }
 
     register {
