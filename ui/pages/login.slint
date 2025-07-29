@@ -6,6 +6,8 @@ import { inputRegistro } from "../components/input-registro.slint";
 export component login inherits Rectangle {
     
     callback go_to_register;
+    callback go_to_voteRooms;
+
     callback login();
 
     in-out property <string> email: "";
@@ -100,6 +102,7 @@ export component login inherits Rectangle {
 
                         click => {
                             root.login();
+                            root.go_to_voteRooms();
                         }
                     }
                 }

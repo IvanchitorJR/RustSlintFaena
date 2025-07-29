@@ -1,7 +1,7 @@
 import { Button, HorizontalBox, StyleMetrics } from "std-widgets.slint";
 import { Styles } from "../styles/styles.slint";
 export component botonRecyclerSalas{ //el boton que va a ser cada sala
-    width: 342px;
+    width: 322px;
     height: 56px;
     property <string> texto: "Sala 1"; //solo permite 50 caracteres de los 100 que podria tener un titulo
     property <string> code;
@@ -47,15 +47,16 @@ export component botonRecyclerSalas{ //el boton que va a ser cada sala
                         font-size: 12px;
                         font-weight: Styles.bold;
                         color: Styles.blanco;
-                        vertical-alignment: bottom;
+                        vertical-alignment: center;
                         width: parent.width;
                         height: parent.height;
-                        y: parent.y - 10px;
+                        y: parent.y - 0px;
+                        x: -8px;
                     }
                 }
             TouchArea { //boton para ver code de sala
                 height: root.height;
-                width: 53px;
+                width: 32px;
                 clicked => {
                     debug("click2");
                     if(code.visible){
@@ -69,6 +70,7 @@ export component botonRecyclerSalas{ //el boton que va a ser cada sala
                     source: @image-url("../img/Eye.png");
                     height: 30px;
                     width: 35px;
+                    x: -8px;
                 }
             }
         }

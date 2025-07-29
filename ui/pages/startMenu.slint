@@ -1,0 +1,163 @@
+import { LineEdit} from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+import { botonRecyclerSalas } from "../components/boton-recycler-salas.slint";
+import { Navbar } from "../components/navbar.slint";
+import { ScrollView } from "std-widgets.slint";
+
+export component startMenu inherits Rectangle {
+    //width: 100%;
+    //height: 100%;
+    background: Styles.azul-fuerte;
+
+    callback go_to_startMenu;
+
+    property <string> user: "UsuarioX";
+
+    VerticalLayout {
+        spacing: 0px;
+        height: 100%;
+
+        VerticalLayout {
+            padding: 25px;
+            spacing: 12px;
+
+            Text {
+                text: "Bienvenido\n" + root.user;
+                font-size: 45px;
+                font-weight: 800;
+                height: 117px;
+                color: white;
+            }
+
+            GridLayout {
+                Row {
+                    Text {
+                        text: "Unirme a una sala:";
+                        font-size: 26px;
+                        height: 35px;
+                        font-weight: Styles.semibold;
+                        color: Styles.blanco;
+                    }
+                }
+
+                Row {
+                    HorizontalLayout {
+                        spacing: 10px;
+                        
+                        Rectangle {
+                            height: 45px;
+                            background: Styles.blanco;
+                            border-radius: 10px;
+
+                            LineEdit {
+                                height: 45px;
+                                width: 100%;
+                                placeholder-text: "Código";
+                                font-size: 16px;
+                            }
+                        }
+
+                        TouchArea {
+                            width: 100px;
+
+                            Rectangle {
+                                background: Styles.azul-bajo;
+                                border-radius: 10px;
+
+                                Text {
+                                    text: "Ingresar";
+                                    font-size: 16px;
+                                    color: Styles.blanco;
+                                }
+                            }
+
+                            clicked => {
+                                debug("Ingresando...");
+                            }
+                        }
+                    }
+                }
+
+                Row {
+                    Text {
+                        text: "Ingresa el código de 6 dígitos de la sala a la que deseas acceder";
+                        font-size: 12px;
+                        height: 25px;
+                        vertical-alignment: center;
+                    }
+                }
+
+                Rectangle {
+                    height: 25px;
+                }
+
+                Row {
+                    Text {
+                        text: "Mis salas activas:";
+                        font-size: 26px;
+                        font-weight: Styles.semibold;
+                        color: white;
+                        height: 35px;
+                    }
+                }
+                ScrollView {
+                    height: 200px;
+                    width: 100%;
+                    viewport-width: 0px;
+                    viewport-height: 500px;
+
+                    VerticalLayout {
+                        spacing: 8px;
+
+                        Rectangle {
+                            height: 1px;
+                            opacity: 0;
+                        }
+
+                        botonRecyclerSalas {}
+                        botonRecyclerSalas {}
+                        botonRecyclerSalas {}
+                    }
+                }
+
+                Rectangle {
+                    height: 25px;
+                }
+
+                Row {
+                    Text {
+                        text: "Salas donde soy miembro:";
+                        font-size: 26px;
+                        font-weight: Styles.semibold;
+                        color: white;
+                        height: 35px;
+                    }
+                }
+                ScrollView {
+                    height: 100px;
+                    width: 100%;
+                    viewport-width: 0px;
+                    viewport-height: 500px;
+
+                    VerticalLayout {
+                        spacing: 8px;
+
+                        Rectangle {
+                            height: 1px;
+                            opacity: 0;
+                        }
+
+                        botonRecyclerSalas {}
+                    }
+                }
+            }
+        }
+
+        VerticalLayout {
+            //height: 90px;
+            alignment: end;
+
+            Navbar {}
+        }
+    }
+}
