@@ -1,6 +1,7 @@
 import { LineEdit} from "std-widgets.slint";
 import { Styles } from "../styles/styles.slint";
-import { botonRecyclerSalas } from "../components/boton-recycler-salas.slint";
+import { botonRecyclerSalasAdmin } from "../components/boton-recycler-salas-admin.slint";
+import { botonRecyclerSalasMiembro } from "../components/boton-recycler-salas-miembro.slint";
 import { Navbar } from "../components/navbar.slint";
 import { ScrollView } from "std-widgets.slint";
 
@@ -143,9 +144,21 @@ export component startMenu inherits Rectangle {
                             opacity: 0;
                         }
 
-                        botonRecyclerSalas {}
-                        botonRecyclerSalas {}
-                        botonRecyclerSalas {}
+                        botonRecyclerSalasAdmin {
+                            go_to_visualizeRoomAdmin => {
+                                root.go_to_visualizeRoomAdmin();
+                            }
+                        }
+                        botonRecyclerSalasAdmin {
+                            go_to_visualizeRoomAdmin => {
+                                root.go_to_visualizeRoomAdmin();
+                            }
+                        }
+                        botonRecyclerSalasAdmin {
+                            go_to_visualizeRoomAdmin => {
+                                root.go_to_visualizeRoomAdmin();
+                            }
+                        }
                     }
                 }
 
@@ -178,9 +191,9 @@ export component startMenu inherits Rectangle {
                             opacity: 0;
                         }
 
-                        botonRecyclerSalas {
-                            go_to_visualizeRoomAdmin => { //cambiar
-                                root.go_to_visualizeRoomAdmin(); //cambiar
+                        botonRecyclerSalasMiembro {
+                            go_to_visualizeRoomMember => {
+                                root.go_to_visualizeRoomMember();
                             }
                         }
                     }

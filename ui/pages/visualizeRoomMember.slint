@@ -11,6 +11,11 @@ export component visualizeRoomMember inherits Rectangle {
 
     callback go_to_visualizeRoomMember;
 
+    callback go_to_rooms;
+    callback go_to_createRoom;
+
+    in-out property <int> navbarIndex: 1;
+
     width: 400px;
 
     VerticalLayout {
@@ -85,7 +90,17 @@ export component visualizeRoomMember inherits Rectangle {
         VerticalLayout {
             alignment: end;
 
-            Navbar {}
+            Navbar {
+                indiceAzulFuerte <=> root.navbarIndex;
+
+                go_to_rooms => {
+                    root.go_to_rooms();
+                }
+
+                go_to_createRoom => {
+                    root.go_to_createRoom();
+                }
+            }
         }
     }
 }

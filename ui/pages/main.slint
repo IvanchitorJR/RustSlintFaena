@@ -81,15 +81,15 @@ export component MainWindow inherits Window {
         visible: root.is_rooms;
         navbarIndex <=> root.navbarIndex;
 
-        go_to_visualizeRoomMember => {
-            root.is_rooms = false;
-            root.is_visualizeRoomMember = true;
-            root.navbarIndex = 1;
-        }
-
         go_to_visualizeRoomAdmin => {
             root.is_rooms = false;
             root.is_visualizeRoomAdmin = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_visualizeRoomMember => {
+            root.is_rooms = false;
+            root.is_visualizeRoomMember = true;
             root.navbarIndex = 1;
         }
 
@@ -102,6 +102,19 @@ export component MainWindow inherits Window {
 
     visualizeRoomMember {
         visible: root.is_visualizeRoomMember;
+        navbarIndex <=> root.navbarIndex;
+
+        go_to_rooms => {
+            root.is_visualizeRoomMember = false;
+            root.is_rooms = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_createRoom => {
+            root.is_visualizeRoomMember = false;
+            root.is_createRoom = true;
+            root.navbarIndex = 2;
+        }
     }
 
     visualizeRoomAdmin {
