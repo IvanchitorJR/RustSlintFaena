@@ -7,9 +7,9 @@ export component Navbar inherits Rectangle {
 
     callback go_to_history;
     callback go_to_rooms;
-    callback go-to_createRoom;
+    callback go_to_createRoom;
 
-    property <int> indiceAzulFuerte: 1;
+    in-out property <int> indiceAzulFuerte: 1;
 
     Rectangle {
         width: parent.width / 6;
@@ -64,6 +64,7 @@ export component Navbar inherits Rectangle {
                 clicked => {
                     root.indiceAzulFuerte = 1;
                     root.go_to_rooms();
+                    debug("En Ver Salas");
                 }
             }
 
@@ -93,7 +94,8 @@ export component Navbar inherits Rectangle {
                 height: parent.height;
                 clicked => {
                     root.indiceAzulFuerte = 2;
-                    root.go-to_createRoom();
+                    root.go_to_createRoom();
+                    debug("En Crear Sala");
                 }
             }
 

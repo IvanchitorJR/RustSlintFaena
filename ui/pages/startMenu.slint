@@ -7,8 +7,16 @@ import { ScrollView } from "std-widgets.slint";
 export component startMenu inherits Rectangle {
     background: Styles.azul-fuerte;
 
-    callback go_to_startMenu;
+    width: 400px;
+    //Callbacks de la Pantalla
     callback go_to_visualizeRoomMember;
+    callback go_to_visualizeRoomAdmin;
+
+    //Callbacks de la Navbar
+    callback go_to_rooms;
+    callback go_to_createRoom;
+
+    in-out property <int> navbarIndex: 1;
 
     property <string> user: "UsuarioX";
 
@@ -171,8 +179,8 @@ export component startMenu inherits Rectangle {
                         }
 
                         botonRecyclerSalas {
-                            go_to_visualizeRoomMember => {
-                                root.go_to_visualizeRoomMember();
+                            go_to_visualizeRoomAdmin => { //cambiar
+                                root.go_to_visualizeRoomAdmin(); //cambiar
                             }
                         }
                     }
@@ -184,7 +192,17 @@ export component startMenu inherits Rectangle {
             //height: 90px;
             alignment: end;
 
-            Navbar {}
+            Navbar {
+                indiceAzulFuerte <=> root.navbarIndex;
+
+                go_to_rooms => {
+                    root.go_to_rooms();
+                }
+
+                go_to_createRoom => {
+                    root.go_to_createRoom();
+                }
+            }
         }
     }
 }

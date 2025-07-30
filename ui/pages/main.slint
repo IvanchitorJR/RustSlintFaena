@@ -4,18 +4,29 @@ import { register } from "register.slint";
 import { Navbar } from "../components/navbar.slint";
 import { startMenu } from "startMenu.slint";
 import { visualizeRoomMember } from "visualizeRoomMember.slint";
+import { visualizeRoomAdmin } from "visualizeRoomAdmin.slint";
+import { createRoom } from "createRoom.slint";
 import { Styles } from "../Styles/styles.slint";
 
 export component MainWindow inherits Window {
     
     title: "Autenticación";
 
+    //Pantallas Iniciales
     property <bool> welcome: true;
     property <bool> is_login: false;
     property <bool> is_register: false;
 
-    property <bool> is_startMenu: false;
+    //Pantallas de StartMenu
     property <bool> is_visualizeRoomMember: false;
+    property <bool> is_visualizeRoomAdmin: false;
+
+    //Indice que se comunica con el índice de la Navbar
+    in-out property <int> navbarIndex: 1;
+
+    //Pantallas de la Navbar
+    property <bool> is_rooms: false;
+    property <bool> is_createRoom: false;
 
     //login
     in-out property <string> email: "";
@@ -59,24 +70,66 @@ export component MainWindow inherits Window {
             root.login();
         }
 
-        go_to_startMenu => {
+        go_to_rooms => {
             root.is_login = false;
-            root.is_startMenu = true;
+            root.is_rooms = true;
         }
         
     }
 
     startMenu {
-        visible: root.is_startMenu;
+        visible: root.is_rooms;
+        navbarIndex <=> root.navbarIndex;
 
         go_to_visualizeRoomMember => {
-            root.is_startMenu = false;
+            root.is_rooms = false;
             root.is_visualizeRoomMember = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_visualizeRoomAdmin => {
+            root.is_rooms = false;
+            root.is_visualizeRoomAdmin = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_createRoom => {
+            root.is_rooms = false;
+            root.is_createRoom = true;
+            root.navbarIndex = 2;
         }
     }
 
     visualizeRoomMember {
         visible: root.is_visualizeRoomMember;
+    }
+
+    visualizeRoomAdmin {
+        visible: root.is_visualizeRoomAdmin;
+        navbarIndex <=> root.navbarIndex;
+
+        go_to_rooms => {
+            root.is_visualizeRoomAdmin = false;
+            root.is_rooms = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_createRoom => {
+            root.is_visualizeRoomAdmin = false;
+            root.is_createRoom = true;
+            root.navbarIndex = 2;
+        }
+    }
+
+    createRoom {
+        visible: root.is_createRoom;
+        navbarIndex <=> root.navbarIndex;
+
+        go_to_rooms => {
+            root.is_createRoom = false;
+            root.is_rooms = true;
+            root.navbarIndex = 1;
+        }
     }
 
     register {

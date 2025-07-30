@@ -4,6 +4,8 @@ export component botonRecyclerVotaciones{
     //width: 351px;
     height: 37px;
 
+    callback go_to_visualizeRoomAdmin;
+
     Rectangle {
         background: Styles.azul-verde;
         border-radius: 10px;
@@ -16,7 +18,8 @@ export component botonRecyclerVotaciones{
             width: parent.width;
             height: parent.height;
             clicked => {
-                debug("click");
+                go_to_visualizeRoomAdmin();
+                debug("Click");
             }
         }
 

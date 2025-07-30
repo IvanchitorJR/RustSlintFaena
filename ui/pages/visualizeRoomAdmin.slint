@@ -1,0 +1,253 @@
+import { Styles } from "../styles/styles.slint";
+import { Navbar } from "../components/navbar.slint";
+import { ScrollView } from "std-widgets.slint";
+import { LineEdit } from "std-widgets.slint";
+import { botonRecyclerVotaciones } from "../components/boton-recycler-votaciones.slint";
+
+export component visualizeRoomAdmin inherits Rectangle {
+    background: Styles.azul-fuerte;
+
+    callback go_to_visualizeRoomAdmin;
+
+    property <string> room_name: "---";
+    property <string> room_description: "---";
+
+    callback go_to_rooms;
+    callback go_to_createRoom;
+
+    in-out property <int> navbarIndex: 1;
+
+    property <string> empty_error: "";
+    property <color> empty_error_text_color: #ff0000;
+
+    width: 400px;
+
+    VerticalLayout {
+        spacing: 0px;
+        height: 100%;
+
+        VerticalLayout {
+            padding: 25px;
+            spacing: 12px;
+
+            Text {
+                text: "Sala X";
+                font-size: 45px;
+                font-weight: 800;
+                height: 60px;
+                color: white;
+            }
+
+            Rectangle {
+                background: Styles.azul-bajo;
+                height: 280px;
+                border-radius: 10px;
+
+                VerticalLayout {
+                    //spacing: 5px;
+
+                    Rectangle {
+                        height: 30px;
+
+                        Text {
+                            text: "Nombre de Sala: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Rectangle {
+                            height: 23px;
+                            background: Styles.blanco;
+                            border-radius: 5px;
+                            x: 170px;
+                            width: 160px;
+
+                            LineEdit {
+                                placeholder-text: root.room_name;
+                                height: 23px;
+                                width: 100%;
+                                //x: 170px;
+                            }
+                        }
+                    }
+                    
+                    Rectangle {
+                        height: 90px;
+
+                        Text {
+                            text: "Descripción de la Sala: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Rectangle {
+                            height: 23px;
+                            background: Styles.blanco;
+                            border-radius: 5px;
+                            x: 170px;
+                            width: 160px;
+
+                            LineEdit {
+                                placeholder-text: root.room_description;
+                                height: 23px;
+                                width: 100%;
+                                //x: 170px;
+                            }
+                        }
+                    }
+
+                    Rectangle {
+                        height: 30px;
+
+                        Text {
+                            text: "Fecha de Creación: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Text {
+                            text: "---";
+                            font-size: 16px;
+                            height: 23px;
+                            x: 170px;
+                            horizontal-alignment: center;
+                        }
+                    }
+
+                    Rectangle {
+                        height: 30px;
+
+                        Text {
+                            text: "Tipo de Acceso: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Text {
+                            text: "---";
+                            font-size: 16px;
+                            height: 23px;
+                            x: 170px;
+                            horizontal-alignment: center;
+                        }
+                    }
+
+                    Rectangle {
+                        height: 30px;
+
+                        Text {
+                            text: "Filtro de Acceso: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Text {
+                            text: "---";
+                            font-size: 16px;
+                            height: 23px;
+                            x: 170px;
+                            horizontal-alignment: center;
+                        }
+                    }
+
+                    Rectangle {
+                        height: 30px;
+
+                        Text {
+                            text: "Código de Acceso: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Text {
+                            text: "---";
+                            font-size: 16px;
+                            height: 23px;
+                            x: 170px;
+                            horizontal-alignment: center;
+                        }
+                    }
+
+                    Rectangle {
+                        height: 30px;
+
+                        Text {
+                            text: "Tipo de Sala: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Text {
+                            text: "---";
+                            font-size: 16px;
+                            height: 23px;
+                            x: 170px;
+                            horizontal-alignment: center;
+                        }
+                    }
+                }
+            }
+
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+
+            Rectangle {
+                height: 15px;
+            }
+
+            HorizontalLayout {
+                height: 50px;
+                width: 100%;
+                alignment: center;
+
+                Rectangle {
+                    background: Styles.azul-bajo;
+                    width: 60%;
+                    border-radius: 10px;
+
+                    Image {
+                        source: @image-url("../img/add_circle.png");
+                        x: 28px;
+                    }
+
+                    Text {
+                        text: "Añadir Votación";
+                        font-size: 16px;
+                        font-weight: Styles.semibold;
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                        x: 55px;
+                    }
+
+                    TouchArea {
+                        width: parent.width;
+                        height: parent.height;
+
+                        clicked => {
+                            debug("Votacion Añadida");
+                        }
+                    }
+                }
+            }
+        }
+
+        VerticalLayout {
+            alignment: end;
+
+            Navbar {
+                indiceAzulFuerte <=> root.navbarIndex;
+
+                go_to_rooms => {
+                    root.go_to_rooms();
+                }
+
+                go_to_createRoom => {
+                    root.go_to_createRoom();
+                }
+            }
+        }
+    }
+}

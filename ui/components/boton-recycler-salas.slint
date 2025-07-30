@@ -9,6 +9,7 @@ export component botonRecyclerSalas{ //el boton que va a ser cada sala
     property <string> code;
 
     callback go_to_visualizeRoomMember;
+    callback go_to_visualizeRoomAdmin;
 
     Rectangle { //el rectangulo que va a ser todo el boton
         background: Styles.azul-bajo;
@@ -23,8 +24,8 @@ export component botonRecyclerSalas{ //el boton que va a ser cada sala
             TouchArea { //nombre de la sala y donde se va a clickear para acceder a la sala
                 height: root.height;
                 width: 238px;
-                clicked => {
-                    root.go_to_visualizeRoomMember();
+                clicked => { //cambiar
+                    root.go_to_visualizeRoomAdmin(); //cambiar
                     debug("click");
                 }
 
