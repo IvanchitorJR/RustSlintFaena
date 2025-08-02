@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+
+Name: AndroidManifest.xml
+SHA-256-Digest: Z5tZoyhECQqXAcjYdWoYiLPq07LPtJ+wDydBHw+vX84=
+
+Name: lib/arm64-v8a/libfaena.so
+SHA-256-Digest: VcveBCfSja2756IedDeGeSUytAliZ3LyeLwD80QUPBI=
+

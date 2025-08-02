@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="rust.faena">
+
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
+
+    <application android:debuggable="true" android:hasCode="false" android:label="Faena">
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="android.app.NativeActivity">
+            <meta-data android:name="android.app.lib_name" android:value="faena"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
