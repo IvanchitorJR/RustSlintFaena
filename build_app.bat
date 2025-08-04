@@ -14,12 +14,16 @@ set CUSTOM_MANIFEST=%PROJECT_DIR%android\AndroidManifest.xml
 set ZIPALIGN=C:\Users\Carlos\AppData\Local\Android\Sdk\build-tools\35.0.0\zipalign.exe
 set APKSIGNER=C:\Users\Carlos\AppData\Local\Android\Sdk\build-tools\35.0.0\apksigner.bat
 
-echo APK_ORIGINAL = %APK_ORIGINAL%
-echo APK_UNPACKED = %APK_UNPACKED%
-echo APKTOOL= %APKTOOL%
-pause
-
+echo LIMPIANDO APK UNPACKED
 rd /S /Q "%APK_UNPACKED%"
+
+echo 0-CREANDO LA APK
+cargo apk build
+if errorlevel 1 (
+    echo ERROR al crear la APK.
+    pause
+    exit /b 1
+)
 
 echo 1-DESCOMPRIMIENDO APK CON APKTOOL
 call "%APKTOOL%" d -f "%APK_ORIGINAL%" -o "%APK_UNPACKED%"

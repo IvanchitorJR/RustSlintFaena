@@ -1,5 +1,4 @@
 slint::include_modules!();
-use std::error::Error;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
@@ -35,7 +34,7 @@ pub async fn android_main(app: slint::android::AndroidApp) {
             } 
             else {
                 let client = client.clone(); //usarlo dentro de tokio::spawn
-                let url = "http://faena-backend.onrender.com/api/usuarios"; //url para la api REST de faena
+                let url = "https://faena-backend.onrender.com/api/usuarios"; //url para la api REST de faena
                 tokio::spawn(async move{
                     match client.get(url).send().await {
                         Ok(res)=>{
