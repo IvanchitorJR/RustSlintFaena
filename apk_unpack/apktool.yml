@@ -1,0 +1,12 @@
+version: 2.12.0
+apkFileName: faena.apk
+sdkInfo:
+  minSdkVersion: 23
+  targetSdkVersion: 30
+versionInfo:
+  versionCode: 16777472
+  versionName: 0.1.0
+sparseResources: true
+compactEntries: true
+doNotCompress:
+- so
