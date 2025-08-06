@@ -8,26 +8,16 @@ import { visualizeRoomAdmin } from "visualizeRoomAdmin.slint";
 import { createRoom } from "createRoom.slint";
 import { Styles } from "../Styles/styles.slint";
 import "../Styles/fonts/SourceSansPro-Regular.otf";
+import { LineEdit } from "std-widgets.slint";
+import { foco-invisible } from "../components/foco-invisible.slint";
 
 export component MainWindow inherits Window {
     
     title: "Autenticación";
-
-    //Pantallas Iniciales
-    property <bool> welcome: true;
-    in-out property <bool> is_login: false;
-    property <bool> is_register: false;
-
-    //Pantallas de StartMenu
-    property <bool> is_visualizeRoomMember: false;
-    property <bool> is_visualizeRoomAdmin: false;
-
+    in-out property <int> pantalla_actual: 0;
+ 
     //Indice que se comunica con el índice de la Navbar
     in-out property <int> navbarIndex: 1;
-
-    //Pantallas de la Navbar
-    in-out property <bool> is_rooms: false;
-    property <bool> is_createRoom: false;
 
     //login
     in-out property <string> email: "";
@@ -46,17 +36,16 @@ export component MainWindow inherits Window {
     //fuente para todos los texto de main.slint
     default-font-family: "Source Sans Pro";
 
-    welcomeFaena {
-        visible: root.welcome;
+    FocoInvisible:=foco-invisible{} //LineText para evitar que se quede el marcador cuando se cambia de pantalla
+
+    if(pantalla_actual==0):welcomeFaena { //0
 
         go_to_login => {
-            root.welcome = false;
-            root.is_login = true;
+            root.pantalla_actual=1;
         }
     }
 
-    login {
-        visible: root.is_login;
+    if(pantalla_actual==1):login { //1
 
         //bindings
         email <=> root.email;
@@ -66,89 +55,77 @@ export component MainWindow inherits Window {
         input_border_color <=> root.input_border_color;
 
         go_to_register => { //boton para ir a registrarse
-            root.is_login = false;
-            root.is_register = true;
+            root.pantalla_actual=2;
+            FocoInvisible.focus();
         }
 
-        login =>{ //boton de login xD
+        login =>{ //boton de login, dependiendo el caso, el backend va a cambiar el flujo del ui
             root.login();
+            FocoInvisible.focus();
         }        
     }
 
-    startMenu {
-        visible: root.is_rooms;
+    if(pantalla_actual==2):register { //2
+
+        go_to_login => {
+            root.pantalla_actual=1;
+            FocoInvisible.focus();
+        }
+    }
+
+    if(pantalla_actual==3):startMenu { //3
         navbarIndex <=> root.navbarIndex;
 
         go_to_visualizeRoomAdmin => {
-            root.is_rooms = false;
-            root.is_visualizeRoomAdmin = true;
+            root.pantalla_actual=5;
             root.navbarIndex = 1;
         }
 
         go_to_visualizeRoomMember => {
-            root.is_rooms = false;
-            root.is_visualizeRoomMember = true;
+            root.pantalla_actual=4;
             root.navbarIndex = 1;
         }
 
         go_to_createRoom => {
-            root.is_rooms = false;
-            root.is_createRoom = true;
+            root.pantalla_actual=6;
             root.navbarIndex = 2;
         }
     }
 
-    visualizeRoomMember {
-        visible: root.is_visualizeRoomMember;
+    if(pantalla_actual==4): visualizeRoomMember { //4
         navbarIndex <=> root.navbarIndex;
 
         go_to_rooms => {
-            root.is_visualizeRoomMember = false;
-            root.is_rooms = true;
+            root.pantalla_actual=3;
             root.navbarIndex = 1;
         }
 
         go_to_createRoom => {
-            root.is_visualizeRoomMember = false;
-            root.is_createRoom = true;
+            root.pantalla_actual=6;
             root.navbarIndex = 2;
         }
     }
 
-    visualizeRoomAdmin {
-        visible: root.is_visualizeRoomAdmin;
+    if(pantalla_actual==5): visualizeRoomAdmin { //5
         navbarIndex <=> root.navbarIndex;
 
         go_to_rooms => {
-            root.is_visualizeRoomAdmin = false;
-            root.is_rooms = true;
+            root.pantalla_actual=3;
             root.navbarIndex = 1;
         }
 
         go_to_createRoom => {
-            root.is_visualizeRoomAdmin = false;
-            root.is_createRoom = true;
+            root.pantalla_actual=6;
             root.navbarIndex = 2;
         }
     }
 
-    createRoom {
-        visible: root.is_createRoom;
+    if(pantalla_actual==6):createRoom { //6
         navbarIndex <=> root.navbarIndex;
 
         go_to_rooms => {
-            root.is_createRoom = false;
-            root.is_rooms = true;
+            root.pantalla_actual=3;
             root.navbarIndex = 1;
-        }
-    }
-
-    register {
-        visible: root.is_register;
-
-        go_to_login => {
-            root.is_register = false;
-            root.is_login = true;
         }
     }
 }
