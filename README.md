@@ -1,6 +1,4 @@
-PROJECTO FAENA APLICACION MOVIL
--
--
+PROYECTO FAENA APLICACION MOVIL
 -
 Para poder hacer la APK se necesita ejecutar el script build_app.bat, el cual hace la APK para android y la instala ahi mismo.
 -
