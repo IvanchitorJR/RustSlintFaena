@@ -9,14 +9,14 @@ name = "faena"
 crate-type = ["cdylib"]
 
 [dependencies]
-slint = { version = "1.3.2", features = ["backend-android-activity-06"] }
+slint = { version = "1.12.1", features = ["backend-android-activity-06"] }
 reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
 tokio ={ version = "1", features = ["full"]}
 serde ={ version = "1.0", features = ["derive"]}
 serde_json = "1.0"
 
 [build-dependencies]
-slint-build = "1.3.2"
+slint-build = "1.12.1"
 
 [package.metadata.android]
 manifest = "android/AndroidManifest.xml"

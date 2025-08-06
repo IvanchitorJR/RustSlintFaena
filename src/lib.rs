@@ -30,6 +30,8 @@ async fn verificar_credenciales(cliente: Client, correo: String, password: Strin
                             if encontrado{
                                 ui.set_empty_error("Bienvenido a Faena".into());
                                 println!("Welcome to faena");
+                                ui.set_is_login(false);
+                                ui.set_is_rooms(true);
                             }
                             else{
                                 ui.set_empty_error("Usuario y/o contrasena incorrectas".into());

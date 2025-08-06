@@ -14,7 +14,7 @@ export component MainWindow inherits Window {
 
     //Pantallas Iniciales
     property <bool> welcome: true;
-    property <bool> is_login: false;
+    in-out property <bool> is_login: false;
     property <bool> is_register: false;
 
     //Pantallas de StartMenu
@@ -25,7 +25,7 @@ export component MainWindow inherits Window {
     in-out property <int> navbarIndex: 1;
 
     //Pantallas de la Navbar
-    property <bool> is_rooms: false;
+    in-out property <bool> is_rooms: false;
     property <bool> is_createRoom: false;
 
     //login
@@ -51,7 +51,7 @@ export component MainWindow inherits Window {
         }
     }
 
-    login_page:=login {
+    login {
         visible: root.is_login;
 
         //bindings
@@ -61,20 +61,14 @@ export component MainWindow inherits Window {
         empty_error_text_color <=> root.empty_error_text_color;
         input_border_color <=> root.input_border_color;
 
-        go_to_register => {
+        go_to_register => { //boton para ir a registrarse
             root.is_login = false;
             root.is_register = true;
         }
 
-        login =>{
+        login =>{ //boton de login xD
             root.login();
-        }
-
-        go_to_rooms => {
-            root.is_login = false;
-            root.is_rooms = true;
-        }
-        
+        }        
     }
 
     startMenu {
