@@ -1,29 +1,40 @@
 import { Button, HorizontalBox, StyleMetrics } from "std-widgets.slint";
 import { Styles } from "../styles/styles.slint";
-export component botonRecyclerSalas{ //el boton que va a ser cada sala
-    width: 342px;
+
+export component botonRecyclerSalasAdmin{ //el boton que va a ser cada sala
+    width: 322px;
     height: 56px;
+
     property <string> texto: "Sala 1"; //solo permite 50 caracteres de los 100 que podria tener un titulo
     property <string> code;
+
+    callback go_to_visualizeRoomMember;
+    callback go_to_visualizeRoomAdmin;
+
     Rectangle { //el rectangulo que va a ser todo el boton
         background: Styles.azul-bajo;
         width: root.width;
         height: root.height;
         border-radius: 16px;
+
         HorizontalBox { //un contenedor horizontal para todos los elementos del elemento
             spacing: 0px;
             padding: 0px;
+
             TouchArea { //nombre de la sala y donde se va a clickear para acceder a la sala
                 height: root.height;
                 width: 238px;
-                clicked => {
+                clicked => { //cambiar
+                    root.go_to_visualizeRoomAdmin(); //cambiar
                     debug("click");
                 }
+
                 Rectangle { // contenedor para alinear el texto dentro del toucharea
                     width: parent.width;
                     height: parent.height;
                     background: transparent;
                     clip: true;
+
                     Text {
                         text: texto;
                         font-size: 16px;
@@ -37,25 +48,30 @@ export component botonRecyclerSalas{ //el boton que va a ser cada sala
                     }
                 }
             }
+
             code := Rectangle { // contenedor para alinear el codigo de la sala, al lado del nombre de sala  |  := para poner una id
                     width: 51px;
                     height: parent.height;
                     background: transparent;
                     visible: false;
+
                     Text {
                         text: "123456";
                         font-size: 12px;
                         font-weight: Styles.bold;
                         color: Styles.blanco;
-                        vertical-alignment: bottom;
+                        vertical-alignment: center;
                         width: parent.width;
                         height: parent.height;
-                        y: parent.y - 10px;
+                        y: parent.y - 0px;
+                        x: -8px;
                     }
                 }
+
             TouchArea { //boton para ver code de sala
                 height: root.height;
-                width: 53px;
+                width: 32px;
+
                 clicked => {
                     debug("click2");
                     if(code.visible){
@@ -65,13 +81,14 @@ export component botonRecyclerSalas{ //el boton que va a ser cada sala
                         code.visible=true;
                     }
                 }
+
                 Image { //imagen del ojo dentro del toucharea
                     source: @image-url("../img/Eye.png");
                     height: 30px;
                     width: 35px;
+                    x: -8px;
                 }
             }
         }
     }
 }
-

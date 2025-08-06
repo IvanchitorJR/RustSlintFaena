@@ -1,13 +1,16 @@
 import { Styles } from "../styles/styles.slint";
 
 export component Navbar inherits Rectangle {
-    width: 365px;
+    //width: parent.width;
     height: 64px;
     background: Styles.azul-bajo;
 
-    property <int> indiceAzulFuerte: 0;
+    callback go_to_history;
+    callback go_to_rooms;
+    callback go_to_createRoom;
 
-    //Indice azul fuerte
+    in-out property <int> indiceAzulFuerte: 1;
+
     Rectangle {
         width: parent.width / 6;
         height: parent.height / 2.2;
@@ -16,13 +19,13 @@ export component Navbar inherits Rectangle {
         border-radius: 16px;
         background: Styles.azul-fuerte;
     }
-    
 
     HorizontalLayout {
-        //spacing: 0;
+        //width: parent.width;
+        //height: parent.height;
 
         Rectangle {
-            width: parent.width / 3;
+            //width: parent.width / 3;
             height: parent.height;
 
             TouchArea {
@@ -30,14 +33,13 @@ export component Navbar inherits Rectangle {
                 height: parent.height;
                 clicked => {
                     root.indiceAzulFuerte = 0;
-                    debug("Click en Historial");
+                    root.go_to_history();
                 }
             }
 
             Image {
                 source: @image-url("../img/folder.png");
                 y: 10px;
-                //horizontal-alignment: center;
             }
 
             Text {
@@ -53,7 +55,7 @@ export component Navbar inherits Rectangle {
         }
 
         Rectangle {
-            width: parent.width / 3;
+            //width: parent.width / 3;
             height: parent.height;
 
             TouchArea {
@@ -61,14 +63,14 @@ export component Navbar inherits Rectangle {
                 height: parent.height;
                 clicked => {
                     root.indiceAzulFuerte = 1;
-                    debug("Click en Ver Salas");
+                    root.go_to_rooms();
+                    debug("En Ver Salas");
                 }
             }
 
             Image {
                 source: @image-url("../img/list.png");
                 y: 10px;
-                //horizontal-alignment: center;
             }
 
             Text {
@@ -84,7 +86,7 @@ export component Navbar inherits Rectangle {
         }
 
         Rectangle {
-            width: parent.width / 3;
+            //width: parent.width / 3;
             height: parent.height;
 
             TouchArea {
@@ -92,14 +94,14 @@ export component Navbar inherits Rectangle {
                 height: parent.height;
                 clicked => {
                     root.indiceAzulFuerte = 2;
-                    debug("Click en Crear Sala");
+                    root.go_to_createRoom();
+                    debug("En Crear Sala");
                 }
             }
 
             Image {
                 source: @image-url("../img/add_circle.png");
                 y: 10px;
-                //horizontal-alignment: center;
             }
 
             Text {

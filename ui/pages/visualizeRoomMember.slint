@@ -1,0 +1,106 @@
+import { Styles } from "../styles/styles.slint";
+import { Navbar } from "../components/navbar.slint";
+import { LineEdit } from "std-widgets.slint";
+import { botonRecyclerVotaciones } from "../components/boton-recycler-votaciones.slint";
+
+export component visualizeRoomMember inherits Rectangle {
+    background: Styles.azul-fuerte;
+
+    property <string> room_name: "---";
+    property <string> room_description: "---";
+
+    callback go_to_visualizeRoomMember;
+
+    callback go_to_rooms;
+    callback go_to_createRoom;
+
+    in-out property <int> navbarIndex: 1;
+
+    width: 400px;
+
+    VerticalLayout {
+        spacing: 0px;
+        height: 100%;
+
+        VerticalLayout {
+            padding: 25px;
+            spacing: 12px;
+
+            Text {
+                text: "Sala X";
+                font-size: 45px;
+                font-weight: 800;
+                height: 60px;
+                color: white;
+            }
+
+            Rectangle {
+                background: Styles.azul-bajo;
+                height: 200px;
+                border-radius: 10px;
+
+                VerticalLayout {
+                    //spacing: 5px;
+
+                    Rectangle {
+                        height: 30px;
+
+                        Text {
+                            text: "Nombre de Sala: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Text {
+                            text: root.room_name;
+                            font-size: 16px;
+                            height: 23px;
+                            x: 170px;
+                            horizontal-alignment: center;
+                        }
+                    }
+                    
+                    Rectangle {
+                        height: 90px;
+
+                        Text {
+                            text: "Descripción de la Sala: ";
+                            font-size: 16px;
+                            width: 160px;
+                            x: 6px;
+                        }
+                        Text {
+                            text: root.room_description;
+                            font-size: 16px;
+                            height: 23px;
+                            x: 170px;
+                            horizontal-alignment: center;
+                        }
+                    }
+                }
+            }
+
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+            botonRecyclerVotaciones {}
+        }
+
+        VerticalLayout {
+            alignment: end;
+
+            Navbar {
+                indiceAzulFuerte <=> root.navbarIndex;
+
+                go_to_rooms => {
+                    root.go_to_rooms();
+                }
+
+                go_to_createRoom => {
+                    root.go_to_createRoom();
+                }
+            }
+        }
+    }
+}

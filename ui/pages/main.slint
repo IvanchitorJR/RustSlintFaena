@@ -1,15 +1,32 @@
 import { welcomeFaena } from "welcome.slint";
 import { login } from "login.slint";
 import { register } from "register.slint";
+import { Navbar } from "../components/navbar.slint";
+import { startMenu } from "startMenu.slint";
+import { visualizeRoomMember } from "visualizeRoomMember.slint";
+import { visualizeRoomAdmin } from "visualizeRoomAdmin.slint";
+import { createRoom } from "createRoom.slint";
 import { Styles } from "../Styles/styles.slint";
 
 export component MainWindow inherits Window {
     
     title: "Autenticación";
 
+    //Pantallas Iniciales
     property <bool> welcome: true;
     property <bool> is_login: false;
     property <bool> is_register: false;
+
+    //Pantallas de StartMenu
+    property <bool> is_visualizeRoomMember: false;
+    property <bool> is_visualizeRoomAdmin: false;
+
+    //Indice que se comunica con el índice de la Navbar
+    in-out property <int> navbarIndex: 1;
+
+    //Pantallas de la Navbar
+    property <bool> is_rooms: false;
+    property <bool> is_createRoom: false;
 
     //login
     in-out property <string> email: "";
@@ -21,6 +38,7 @@ export component MainWindow inherits Window {
     out property <color> rojo: Styles.empty_error_text_color;
     out property <color> verde: Styles.verde;
     out property <color> border: Styles.input_border_color;
+
     // Callback del login
     callback login();
 
@@ -35,18 +53,95 @@ export component MainWindow inherits Window {
 
     login_page:=login {
         visible: root.is_login;
+
         //bindings
         email <=> root.email;
         pswd <=> root.pswd;
         empty_error <=> root.empty_error;
         empty_error_text_color <=> root.empty_error_text_color;
         input_border_color <=> root.input_border_color;
+
         go_to_register => {
             root.is_login = false;
             root.is_register = true;
         }
+
         login =>{
             root.login();
+        }
+
+        go_to_rooms => {
+            root.is_login = false;
+            root.is_rooms = true;
+        }
+        
+    }
+
+    startMenu {
+        visible: root.is_rooms;
+        navbarIndex <=> root.navbarIndex;
+
+        go_to_visualizeRoomAdmin => {
+            root.is_rooms = false;
+            root.is_visualizeRoomAdmin = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_visualizeRoomMember => {
+            root.is_rooms = false;
+            root.is_visualizeRoomMember = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_createRoom => {
+            root.is_rooms = false;
+            root.is_createRoom = true;
+            root.navbarIndex = 2;
+        }
+    }
+
+    visualizeRoomMember {
+        visible: root.is_visualizeRoomMember;
+        navbarIndex <=> root.navbarIndex;
+
+        go_to_rooms => {
+            root.is_visualizeRoomMember = false;
+            root.is_rooms = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_createRoom => {
+            root.is_visualizeRoomMember = false;
+            root.is_createRoom = true;
+            root.navbarIndex = 2;
+        }
+    }
+
+    visualizeRoomAdmin {
+        visible: root.is_visualizeRoomAdmin;
+        navbarIndex <=> root.navbarIndex;
+
+        go_to_rooms => {
+            root.is_visualizeRoomAdmin = false;
+            root.is_rooms = true;
+            root.navbarIndex = 1;
+        }
+
+        go_to_createRoom => {
+            root.is_visualizeRoomAdmin = false;
+            root.is_createRoom = true;
+            root.navbarIndex = 2;
+        }
+    }
+
+    createRoom {
+        visible: root.is_createRoom;
+        navbarIndex <=> root.navbarIndex;
+
+        go_to_rooms => {
+            root.is_createRoom = false;
+            root.is_rooms = true;
+            root.navbarIndex = 1;
         }
     }
 

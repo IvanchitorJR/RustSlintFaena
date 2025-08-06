@@ -1,0 +1,38 @@
+import { Styles } from "../Styles/styles.slint"; 
+import { Navbar } from "../components/navbar.slint";
+
+export component createRoom inherits Rectangle {
+    
+    callback go_to_createRoom;
+    callback go_to_rooms;
+
+    in-out property <int> navbarIndex: 2;
+
+    width: 400px;
+    background: Styles.azul-fuerte;
+
+    VerticalLayout {
+        Text {
+            text:"NO HAY NADA AÚN";
+            horizontal-alignment: center;
+            vertical-alignment: center;
+            font-size: 34px;
+            color: white;
+        }
+        VerticalLayout {
+            alignment: end;
+
+            Navbar {
+                indiceAzulFuerte <=> root.navbarIndex;
+
+                go_to_rooms => {
+                    root.go_to_rooms();
+                }
+
+                go_to_createRoom => {
+                    root.go_to_createRoom();
+                }
+            }
+        }
+    }
+} 

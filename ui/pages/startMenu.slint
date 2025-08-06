@@ -1,0 +1,221 @@
+import { LineEdit} from "std-widgets.slint";
+import { Styles } from "../styles/styles.slint";
+import { botonRecyclerSalasAdmin } from "../components/boton-recycler-salas-admin.slint";
+import { botonRecyclerSalasMiembro } from "../components/boton-recycler-salas-miembro.slint";
+import { Navbar } from "../components/navbar.slint";
+import { ScrollView } from "std-widgets.slint";
+
+export component startMenu inherits Rectangle {
+    background: Styles.azul-fuerte;
+
+    width: 400px;
+    //Callbacks de la Pantalla
+    callback go_to_visualizeRoomMember;
+    callback go_to_visualizeRoomAdmin;
+
+    //Callbacks de la Navbar
+    callback go_to_rooms;
+    callback go_to_createRoom;
+
+    in-out property <int> navbarIndex: 1;
+
+    property <string> user: "UsuarioX";
+
+    property <string> empty_error: "";
+    property <color> empty_error_text_color: #ff0000;
+
+    VerticalLayout {
+        spacing: 0px;
+        height: 100%;
+
+        VerticalLayout {
+            padding: 25px;
+            spacing: 12px;
+
+            Text {
+                text: "Bienvenido\n" + root.user;
+                font-size: 45px;
+                font-weight: 800;
+                height: 117px;
+                color: white;
+            }
+
+            GridLayout {
+                Row {
+                    Text {
+                        text: "Unirme a una sala:";
+                        font-size: 26px;
+                        height: 35px;
+                        font-weight: Styles.semibold;
+                        color: Styles.blanco;
+                    }
+                }
+
+                Row {
+                    HorizontalLayout {
+                        spacing: 10px;
+                        
+                        Rectangle {
+                            height: 45px;
+                            background: Styles.blanco;
+                            border-radius: 10px;
+
+                            codigo := LineEdit {
+                                height: 45px;
+                                width: 100%;
+                                placeholder-text: "Código";
+                                font-size: 16px;
+                            }
+                        }
+
+                        TouchArea {
+                            width: 100px;
+
+                            Rectangle {
+                                background: Styles.azul-bajo;
+                                border-radius: 10px;
+
+                                Text {
+                                    text: "Ingresar";
+                                    font-size: 16px;
+                                    color: Styles.blanco;
+                                }
+                            }
+
+                            clicked => {
+                                
+                                if (codigo.text == "") {
+                                    root.empty_error = "Hubo un error con el código ingresado";
+                                    root.empty_error_text_color = #ff0000;
+                                }
+                                else {
+                                    debug("Ingresando con código: " + codigo.text);
+                                    root.empty_error = "";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Row {
+                    Text {
+                        text: "Ingresa el código de 6 dígitos de la sala a la que deseas acceder";
+                        font-size: 12px;
+                        height: 25px;
+                        vertical-alignment: center;
+                    }
+                }
+
+                Rectangle {
+                    height: 25px;
+
+                    Text {
+                        text: root.empty_error;
+                        font-size: 12px;
+                        font-weight: Styles.semibold;
+                        width: parent.width;
+                        color: root.empty_error_text_color;
+                        horizontal-alignment: left;
+                    }
+                }
+
+                Row {
+                    Text {
+                        text: "Mis salas activas:";
+                        font-size: 26px;
+                        font-weight: Styles.semibold;
+                        color: white;
+                        height: 35px;
+                    }
+                }
+                ScrollView {
+                    height: 200px;
+                    width: 100%;
+                    viewport-width: 0px;
+                    viewport-height: 500px;
+
+                    vertical-scrollbar-policy: always-off;
+
+                    VerticalLayout {
+                        spacing: 8px;
+
+                        Rectangle {
+                            height: 1px;
+                            opacity: 0;
+                        }
+
+                        botonRecyclerSalasAdmin {
+                            go_to_visualizeRoomAdmin => {
+                                root.go_to_visualizeRoomAdmin();
+                            }
+                        }
+                        botonRecyclerSalasAdmin {
+                            go_to_visualizeRoomAdmin => {
+                                root.go_to_visualizeRoomAdmin();
+                            }
+                        }
+                        botonRecyclerSalasAdmin {
+                            go_to_visualizeRoomAdmin => {
+                                root.go_to_visualizeRoomAdmin();
+                            }
+                        }
+                    }
+                }
+
+                Rectangle {
+                    height: 25px;
+                }
+
+                Row {
+                    Text {
+                        text: "Salas donde soy miembro:";
+                        font-size: 26px;
+                        font-weight: Styles.semibold;
+                        color: white;
+                        height: 35px;
+                    }
+                }
+                ScrollView {
+                    height: 100px;
+                    width: 100%;
+                    viewport-width: 0px;
+                    viewport-height: 500px;
+
+                    vertical-scrollbar-policy: always-off;
+
+                    VerticalLayout {
+                        spacing: 8px;
+
+                        Rectangle {
+                            height: 1px;
+                            opacity: 0;
+                        }
+
+                        botonRecyclerSalasMiembro {
+                            go_to_visualizeRoomMember => {
+                                root.go_to_visualizeRoomMember();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        VerticalLayout {
+            //height: 90px;
+            alignment: end;
+
+            Navbar {
+                indiceAzulFuerte <=> root.navbarIndex;
+
+                go_to_rooms => {
+                    root.go_to_rooms();
+                }
+
+                go_to_createRoom => {
+                    root.go_to_createRoom();
+                }
+            }
+        }
+    }
+}
