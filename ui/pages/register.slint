@@ -5,16 +5,20 @@ import { botonPrincipal } from "../components/boton-prinicipal.slint";
 
 export component register inherits Rectangle {
 
+    //callbacks
     callback go_to_login;
+    callback registrar();
 
-    property <string> username: "";
-    property <string> email: "";
-    property <string> pswd: "";
+    //propiedades del registro de usuario
+    in-out property <string> username: "";
+    in-out property <string> email: "";
+    in-out property <string> pswd: "";
     property <string> confirm_pswd: "";
 
-    property <string> empty_error: "";
-    property <color> empty_error_text_color: #ff0000;
-    property <color> input_border_color: #e8e8e8;
+    //propiedades de ui
+    in-out property <string> empty_error: "";
+    in-out property <color> empty_error_text_color: #ff0000;
+    in-out property <color> input_border_color: #e8e8e8;
 
     background: white;
 
@@ -24,9 +28,9 @@ export component register inherits Rectangle {
         Row {
             Text {
                 text: "Faena";
-                font-size: 80px;
+                font-size: 96px;
                 height: 95px;
-                font-weight: Styles.bold;
+                font-weight: Styles.black;
                 vertical-alignment: center;
                 horizontal-alignment: center;
                 wrap: word-wrap;
@@ -121,6 +125,7 @@ export component register inherits Rectangle {
                         texto: "Crear cuenta";
 
                         click => {
+                            root.registrar();
                             if (root.username == "" || root.email == "" || root.pswd == "" || root.confirm_pswd == "") {
                                     root.empty_error = "No puede haber campos vacíos";
                                     root.empty_error_text_color = #ff0000;

@@ -7,6 +7,7 @@ import { visualizeRoomMember } from "visualizeRoomMember.slint";
 import { visualizeRoomAdmin } from "visualizeRoomAdmin.slint";
 import { createRoom } from "createRoom.slint";
 import { Styles } from "../Styles/styles.slint";
+import "../Styles/fonts/SourceSansPro-Regular.otf";
 
 export component MainWindow inherits Window {
     
@@ -41,6 +42,9 @@ export component MainWindow inherits Window {
 
     // Callback del login
     callback login();
+
+    //fuente para todos los texto de main.slint
+    default-font-family: "Source Sans Pro";
 
     welcomeFaena {
         visible: root.welcome;

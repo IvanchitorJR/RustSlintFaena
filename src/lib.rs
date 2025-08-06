@@ -19,8 +19,8 @@ async fn verificar_credenciales(cliente: Client, correo: String, password: Strin
             match res.json::<Vec<Usuario>>().await {
                 Ok(usuarios)=>{ //si existen usuarios o pudo la app recibir y deserializar la respuesta en un vector de usuarios(struct)
                     let mut encontrado: bool = false;
-                    for Usuario in usuarios{
-                        if Usuario.email==correo && Usuario.contrasena==password{
+                    for usuario in usuarios{
+                        if usuario.email==correo && usuario.contrasena==password{
                             encontrado=true;
                             break;
                         }
