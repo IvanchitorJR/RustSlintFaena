@@ -13,7 +13,7 @@ export component register inherits Rectangle {
     in-out property <string> username: "";
     in-out property <string> email: "";
     in-out property <string> pswd: "";
-    property <string> confirm_pswd: "";
+    in-out property <string> confirm_pswd: "";
 
     //propiedades de ui
     in-out property <string> empty_error: "";
@@ -126,21 +126,6 @@ export component register inherits Rectangle {
 
                         click => {
                             root.registrar();
-                            if (root.username == "" || root.email == "" || root.pswd == "" || root.confirm_pswd == "") {
-                                    root.empty_error = "No puede haber campos vacíos";
-                                    root.empty_error_text_color = #ff0000;
-                                    root.input_border_color = #ff0000;
-                            }
-                            else if (root.pswd != root.confirm_pswd) {
-                                    root.empty_error = "Las contraseñas no coinciden";
-                                    root.empty_error_text_color = #ff0000;
-                                    root.input_border_color = #ff0000;
-                            }
-                            else {
-                                    root.empty_error = "Cuenta creada exitosamente";
-                                    root.empty_error_text_color = #00aa00;
-                                    root.input_border_color = #00aa00;
-                            }
                         }
                     }
                 }
