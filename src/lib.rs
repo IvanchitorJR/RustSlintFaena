@@ -2,15 +2,14 @@ slint::include_modules!();
 use std::sync::Arc;
 use reqwest::Client;
 use serde::Deserialize;
+use std::collections::HashMap;
 
 #[derive(Debug, Deserialize)]
 //estructura de los usuarios en rust, posteriolmente se convierte en json
 struct Usuario {
-    id: i32,
     nombre: String,
     email: String,
     contrasena: String,
-    premium: bool,
 }
 // Funciones para validar la password
 fn buscar_caracter_especial(password:&str) -> bool{
@@ -61,40 +60,60 @@ fn validar_usuario(username: &str, correo: &str, pswd: &str, confirm_pswd: &str)
 //Funciones principales de los botones login y registrarse
 async fn registrar_usuario(cliente: Arc<Client>, username: String, correo: String, password: String, ui_handle: slint::Weak<MainWindow>){
     let url="https://faena-backend.onrender.com/api/usuarios"; //url para la api rest con los usuarios
-    match cliente.get(url).send().await{
-        Ok(res)=>{
+    match cliente.get(url).send().await{ //consulta de todos los usuarios para verificar correos
+        Ok(res)=>{ //respuesta de GET
             match res.json::<Vec<Usuario>>().await{
-                Ok(usuarios)=>{
+                Ok(usuarios)=>{ //si tenemos a los usuarios
                     let mut correo_registrado = false;
+                    let mut usuario_registrado=false;
                     for usuario in usuarios{
-                        if(usuario.email==correo){
+                        if usuario.email==correo{
                             correo_registrado=true;
                             break;
                         }
                     }
+                    if !correo_registrado{
+                        let mut datos = HashMap::new();
+                        datos.insert("nombre", username.clone());
+                        datos.insert("contrasena", password.clone());
+                        datos.insert("email", correo.clone());
+                        datos.insert("premium", "false".to_string());
+                        let res= cliente.post(url).json(&datos).send().await;
+                        match res {
+                            Ok(_res)=>{
+                                usuario_registrado=true;
+                                eprintln!("Bienvenido a la faenation");
+                            }
+                            Err(err)=>{
+                                usuario_registrado=false;
+                                eprintln!("Fallo al hacer peticion POST: {:?}", err);
+                            }
+                        }
+                    }
                     slint::invoke_from_event_loop(move ||{
                         if let Some(ui) = ui_handle.upgrade(){
+                            if usuario_registrado{
+                                ui.set_pantalla_actual(3);
+                            }
                             if correo_registrado{
                                 ui.set_empty_error("Correo ya registrado".into());
                                 ui.set_empty_error_text_color(ui.get_rojo());
                                 ui.set_input_border_color(ui.get_border());
                             }
-                            else{
-                                eprintln!("Bienvenido a la faenation");
-                            }
                         }
                     }).unwrap();
                 }
-                Err(err) =>{
-                    eprintln!("Error al conseguir los usuarios: {:?}", err);
+                Err(err) => { //error si no tenermos usuarios
+                        eprintln!("Error al conseguir los usuarios: {:?}", err);
                 }
             }
         }
-        Err(err) =>{
-            println!("Error al hacer la peticion reqwest: {:?}", err);
-        }
+    Err(err) => { //error de GET
+        eprintln!("Error al hacer la peticion reqwest: {:?}", err);
     }
 }
+}
+    
 
 async fn verificar_credenciales(cliente: Arc<Client>, correo: String, password: String, ui_handle: slint::Weak<MainWindow>){
     let url = "https://faena-backend.onrender.com/api/usuarios"; //url para la api rest con los usuarios
