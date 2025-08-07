@@ -4,7 +4,7 @@ import { inputRegistro } from "../components/input-registro.slint";
 import { botonPrincipal } from "../components/boton-prinicipal.slint";
 
 export component register inherits Rectangle {
-
+    width: 400px;
     //callbacks
     callback go_to_login;
     callback registrar();
@@ -30,7 +30,7 @@ export component register inherits Rectangle {
                 text: "Faena";
                 font-size: 96px;
                 height: 95px;
-                font-weight: Styles.black;
+                font-weight: Styles.bold;
                 vertical-alignment: center;
                 horizontal-alignment: center;
                 wrap: word-wrap;
@@ -40,7 +40,7 @@ export component register inherits Rectangle {
         Row {
             Image {
                 source: @image-url("../img/FAENApng.png");
-                height: 125px;
+                height: 180px;
             }
         }
         Row {
@@ -52,54 +52,46 @@ export component register inherits Rectangle {
                 vertical-alignment: center;
                 horizontal-alignment: center;
                 wrap: word-wrap;
-                color: Styles.negro;
+                color: Styles.azul-bajo;
+            }
+        }
+
+        VerticalLayout {
+            padding-top: 20px;
+            spacing: 20px;
+
+            //Registrarse (Nombre de Usuario)
+            inputRegistro {
+                placeholder: "Nombre de Usuario";
+                texto <=> root.username;
+                tipo: text;
+            }
+
+            //Registrarse (Correo Electrónico)
+            inputRegistro {
+                placeholder: "Correo Electrónico";
+                texto <=> root.email;
+                tipo: text;
+            }
+
+            //Registrarse (Contraseña)
+            inputRegistro {
+                placeholder: "Contraseña";
+                texto <=> root.pswd;
+                tipo: password;
+            }
+
+            //Registrarse (Confirmar Contraseña)
+            inputRegistro {
+                placeholder: "Confirmar Contraseña";
+                texto <=> root.confirm_pswd;
+                tipo: password;
             }
         }
 
         Row {
             VerticalLayout {
-                spacing: 2px;
-                padding-top: 2px;
-
-                //Nombre de usuario
-                inputRegistro {
-                    texto <=> root.username;
-                    placeholder: "Nombre de Usuario";
-                    tipo: text;
-                }
-
-                //Correo electronico
-                inputRegistro {
-                    texto <=> root.email;
-                    placeholder: "Correo Electrónico";
-                    tipo: text;
-                }
-            }
-        }
-
-        Row {
-            VerticalLayout {
-                spacing: 2px;
-                padding-top: 2px;
-
-                //Password
-                inputRegistro {
-                    texto <=> root.pswd;
-                    placeholder: "Contraseña";
-                    tipo: password;
-                }
-
-                //Password repetidoa
-                inputRegistro {
-                    texto <=> root.confirm_pswd;
-                    placeholder: "Confirmar Contraseña";
-                    tipo: password;
-                }
-            }
-        }
-
-        Row {
-            VerticalLayout {
+                padding-top: 10px;
                 spacing: 10px;
 
                 //Errores
