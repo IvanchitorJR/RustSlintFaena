@@ -2,12 +2,10 @@ import { LineEdit } from "std-widgets.slint";
 import { Styles } from "../styles/styles.slint";
 import { botonPrincipal } from "../components/boton-prinicipal.slint";
 import { inputRegistro } from "../components/input-registro.slint";
-
+import "../Styles/fonts/SourceSansPro-Regular.otf";
 export component login inherits Rectangle {
     
     callback go_to_register;
-    
-    callback go_to_rooms;
 
     callback login();
 
@@ -103,7 +101,6 @@ export component login inherits Rectangle {
 
                         click => {
                             root.login();
-                            root.go_to_rooms();
                         }
                     }
                 }

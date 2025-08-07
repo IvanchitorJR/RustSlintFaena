@@ -1,1 +1,0 @@
-C:\Users\Carlos\projects\slint\appfaena\RustSlintFaena\tools\overwrite_manifest\target\debug\overwrite_manifest.exe: C:\Users\Carlos\projects\slint\appfaena\RustSlintFaena\tools\overwrite_manifest\src\main.rs

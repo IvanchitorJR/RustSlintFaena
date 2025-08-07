@@ -16,7 +16,7 @@ versionInfo:
   versionName: 0.1.0
 resourcesAreCompressed: false
 sharedLibrary: false
-sparseResources: false
+sparseResources: true
 doNotCompress:
   - resources.arsc
   - lib/arm64-v8a/libfaena.so
