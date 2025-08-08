@@ -11,6 +11,8 @@ import "../Styles/fonts/SourceSansPro-Regular.otf";
 import { LineEdit } from "std-widgets.slint";
 import { foco-invisible } from "../components/foco-invisible.slint";
 
+import { inputRegistro } from "../components/input-registro.slint";
+
 export component MainWindow inherits Window {
     
     title: "Autenticación";
@@ -63,12 +65,15 @@ export component MainWindow inherits Window {
 
         go_to_register => { //boton para ir a registrarse
             root.pantalla_actual=2;
-            FocoInvisible.focus();
+            FocoInvisible.clear-focus();
+            FocoInvisible.clear-selection();
+            root.email_login="";
+            root.pswd_login="";
+            root.empty_error="";
         }
 
         login =>{ //boton de login, dependiendo el caso, el backend va a cambiar el flujo del ui
             root.login();
-            FocoInvisible.focus();
         }        
     }
 
@@ -85,7 +90,13 @@ export component MainWindow inherits Window {
 
         go_to_login => {
             root.pantalla_actual=1;
-            FocoInvisible.focus();
+            FocoInvisible.clear-focus();
+            FocoInvisible.clear-selection();
+            root.username="";
+            root.email_registro="";
+            root.pswd_registro="";
+            root.confirm_pswd="";
+            root.empty_error="";
         }
         registrar => {
             root.registrar();

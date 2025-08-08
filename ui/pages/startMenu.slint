@@ -8,7 +8,7 @@ import { ScrollView } from "std-widgets.slint";
 export component startMenu inherits Rectangle {
     background: Styles.azul-fuerte;
 
-    width: 400px;
+    //width: 400px;
     //Callbacks de la Pantalla
     callback go_to_visualizeRoomMember;
     callback go_to_visualizeRoomAdmin;
@@ -55,17 +55,11 @@ export component startMenu inherits Rectangle {
                     HorizontalLayout {
                         spacing: 10px;
                         
-                        Rectangle {
+                        codigo := LineEdit {
                             height: 45px;
-                            background: Styles.blanco;
-                            border-radius: 10px;
-
-                            codigo := LineEdit {
-                                height: 45px;
-                                width: 100%;
-                                placeholder-text: "Código";
-                                font-size: 16px;
-                            }
+                            width: 62%;
+                            placeholder-text: "Código";
+                            font-size: 16px;
                         }
 
                         TouchArea {

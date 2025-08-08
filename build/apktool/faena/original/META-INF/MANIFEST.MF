@@ -4,5 +4,9 @@ Name: AndroidManifest.xml
 SHA-256-Digest: Z5tZoyhECQqXAcjYdWoYiLPq07LPtJ+wDydBHw+vX84=
 
 Name: lib/arm64-v8a/libfaena.so
+<<<<<<< HEAD
 SHA-256-Digest: AVzfwolyYWsWvvYw5FTuXq1umLl3pU1eUyr+pbtLsQE=
+=======
+SHA-256-Digest: 7Ottznt/TEsZDKahTyrqMspJCUhbbvuGvb6PDCPcvnM=
+>>>>>>> 5f944f77ea91a0ecec34ab8a4e4ed6dc5425a731
 

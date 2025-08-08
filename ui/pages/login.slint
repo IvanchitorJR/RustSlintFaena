@@ -3,8 +3,9 @@ import { Styles } from "../styles/styles.slint";
 import { botonPrincipal } from "../components/boton-prinicipal.slint";
 import { inputRegistro } from "../components/input-registro.slint";
 import "../Styles/fonts/SourceSansPro-Regular.otf";
+
 export component login inherits Rectangle {
-    
+    width: 400px;
     callback go_to_register;
 
     callback login();
@@ -24,7 +25,7 @@ export component login inherits Rectangle {
         Row {
             Text {
                 text: "Faena";
-                font-size: 80px;
+                font-size: 96px;
                 height: 95px;
                 font-weight: Styles.bold;
                 vertical-alignment: center;
@@ -52,10 +53,23 @@ export component login inherits Rectangle {
             }
         }
 
-        Row {
+        VerticalLayout {
+            spacing: 20px;
+            padding-top: 20px;
+            inputRegistro {
+                texto <=> root.email;
+                placeholder: "Correo electrónico";
+                tipo: text;
+            }
+            inputRegistro {
+                texto <=> root.pswd;
+                placeholder: "Contraseña";
+                tipo: password;
+            }
+        }
+
+        /*Row {
             VerticalLayout {
-                spacing: 2px;
-                padding-top: 18px;
 
                 //Iniciar Sesión (Correo Electrónico)
                 inputRegistro {
@@ -71,10 +85,11 @@ export component login inherits Rectangle {
                     tipo: password;
                 }
             }
-        }
+        }*/
 
         Row {
             VerticalLayout {
+                padding-top: 10px; 
                 spacing: 10px;
                 
                 //Errores
