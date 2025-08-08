@@ -1,11 +1,11 @@
 Signature-Version: 1.0
 Created-By: 1.0 (Android)
-SHA-256-Digest-Manifest: vm1gzRWxCriEzrHSFF5IYvXBchx25MB/AcJ9Ce17qw4=
+SHA-256-Digest-Manifest: wkcBEYS48LTVfwGA1I3GlNeOq2rnHb/ANVWr0C7A6Eo=
 X-Android-APK-Signed: 2, 3
 
 Name: AndroidManifest.xml
 SHA-256-Digest: xwajvQfrb7omk4SLvYl4YbOl+pA5j4aeaYkRVPxo3JI=
 
 Name: lib/arm64-v8a/libfaena.so
-SHA-256-Digest: PwLqpBX2gjvGBTjc1ud/KzTWxRuhlHOfvKxVV1Fvd0Q=
+SHA-256-Digest: 9JlKjg7z3BcK0oG9JGKsGYENTkxPMG0GIg15xON/t8s=
 

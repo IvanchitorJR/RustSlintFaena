@@ -1,15 +1,17 @@
 slint::include_modules!();
 use std::sync::Arc;
 use reqwest::Client;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 //estructura de los usuarios en rust, posteriolmente se convierte en json
-struct Usuario {
-    nombre: String,
-    email: String,
-    contrasena: String,
+pub struct Usuario {
+    pub nombre: String,
+    #[serde(rename = "contrasena")]
+    pub contrase_a: String,
+    pub email: String,
+    pub premium: bool,
 }
 // Funciones para validar la password
 fn buscar_caracter_especial(password:&str) -> bool{
@@ -73,16 +75,23 @@ async fn registrar_usuario(cliente: Arc<Client>, username: String, correo: Strin
                         }
                     }
                     if !correo_registrado{
-                        let mut datos = HashMap::new();
-                        datos.insert("nombre", username.clone());
-                        datos.insert("contrasena", password.clone());
-                        datos.insert("email", correo.clone());
-                        datos.insert("premium", "false".to_string());
-                        let res= cliente.post(url).json(&datos).send().await;
+                        let nuevo_usuario= Usuario{
+                            nombre: username.clone(),
+                            email: correo.clone(),
+                            contrase_a: password.clone(),
+                            premium: false,
+                        };
+                        let res= cliente.post(url).json(&nuevo_usuario).send().await;
                         match res {
                             Ok(_res)=>{
-                                usuario_registrado=true;
-                                eprintln!("Bienvenido a la faenation");
+                                if _res.status().is_success(){
+                                    usuario_registrado=true;
+                                    eprintln!("Bienvenido a la faenation: {:?}", _res);
+                                }
+                                else{
+                                    usuario_registrado=false;
+                                    eprintln!("ERROR: {:?}", _res);
+                                }
                             }
                             Err(err)=>{
                                 usuario_registrado=false;
@@ -123,7 +132,7 @@ async fn verificar_credenciales(cliente: Arc<Client>, correo: String, password: 
                 Ok(usuarios)=>{ //si existen usuarios o pudo la app recibir y deserializar la respuesta en un vector de usuarios(struct)
                     let mut encontrado: bool = false;
                     for usuario in usuarios{
-                        if usuario.email==correo && usuario.contrasena==password{
+                        if usuario.email==correo && usuario.contrase_a==password{
                             encontrado=true;
                             break;
                         }
