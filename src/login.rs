@@ -5,12 +5,7 @@ use slint::Weak;
 
 use crate::MainWindow;
 
-pub async fn verificar_credenciales(
-    cliente: Arc<Client>,
-    correo: String,
-    password: String,
-    ui_handle: Weak<MainWindow>
-){
+pub async fn verificar_credenciales(cliente: Arc<Client>,correo: String,password: String,ui_handle: Weak<MainWindow>){
     let url = "https://faena-backend.onrender.com/api/usuarios"; //url para la api rest con los usuarios
     match cliente.get(url).send().await { //enviamos la peticion y vemos las posibles respuestas
         Ok(res) => { //si recibimos una respuesta

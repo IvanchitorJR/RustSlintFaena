@@ -12,6 +12,7 @@ export component startMenu inherits Rectangle {
     //Callbacks de la Pantalla
     callback go_to_visualizeRoomMember;
     callback go_to_visualizeRoomAdmin;
+    callback enviar_codigo();
 
     //Callbacks de la Navbar
     callback go_to_rooms;
@@ -19,10 +20,11 @@ export component startMenu inherits Rectangle {
 
     in-out property <int> navbarIndex: 1;
 
-    property <string> user: "UsuarioX";
+    in-out property <string> user: "UsuarioX";
+    in-out property <string> codigo: "";
 
-    property <string> empty_error: "";
-    property <color> empty_error_text_color: #ff0000;
+    in-out property <string> empty_error: "";
+    in-out property <color> empty_error_text_color: #ff0000;
 
     VerticalLayout {
         spacing: 0px;
@@ -56,6 +58,7 @@ export component startMenu inherits Rectangle {
                         spacing: 10px;
                         
                         codigo := LineEdit {
+                            text <=> root.codigo;
                             height: 45px;
                             width: 62%;
                             placeholder-text: "Código";
@@ -77,7 +80,8 @@ export component startMenu inherits Rectangle {
                             }
 
                             clicked => {
-                                
+                                root.enviar_codigo();
+
                                 if (codigo.text == "") {
                                     root.empty_error = "Hubo un error con el código ingresado";
                                     root.empty_error_text_color = #ff0000;

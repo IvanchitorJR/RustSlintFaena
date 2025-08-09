@@ -1,13 +1,16 @@
 slint::include_modules!();
 
+//Archivos donde se ejecutan ciertas acciones y archivos necesarios para el desarrollo de APP
 mod modelo;
 mod registrar;
 mod login;
+mod entrar_sala;
 
 use std::sync::Arc;
 use reqwest::Client;
 use registrar::{registrar_usuario, validar_usuario};
 use login::verificar_credenciales;
+use entrar_sala::unirse_sala;
 
 #[tokio::main]
 #[cfg(target_os = "android")]
@@ -59,6 +62,20 @@ pub async fn android_main(app: slint::android::AndroidApp) {
                     ui_instance.set_empty_error_text_color(ui_instance.get_rojo());
                     ui_instance.set_input_border_color(ui_instance.get_border());
                 }
+            }
+        }
+    });
+    ui.on_enviar_codigo({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui_instance = ui_handle.unwrap();
+            let codigo = ui_instance.get_codigo().to_string();
+            if codigo.chars().count() != 6{
+                ui_instance.set_empty_error("El código debe de llevar 6 caracteres");
+                ui_instance.set_empty_error_text_color(ui_instance.get_rojo());
+            }
+            else {
+                entrar_sala();
             }
         }
     });

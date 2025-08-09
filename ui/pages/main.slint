@@ -38,9 +38,15 @@ export component MainWindow inherits Window {
     in-out property <string> pswd_registro: "";
     in-out property <string> confirm_pswd: "";
 
+    //startMenu
+    in-out property <string> user: "";
+    in-out property <string> codigo:"";
+
+
     // Callbacks de conexion con rust
     callback login();
     callback registrar();
+    callback enviar_codigo();
 
     //fuente para todos los texto de main.slint
     default-font-family: "Source Sans Pro";
@@ -104,7 +110,12 @@ export component MainWindow inherits Window {
     }
 
     if(pantalla_actual==3):startMenu { //   3-MENU DE INICIO
+        //bindings
         navbarIndex <=> root.navbarIndex;
+        codigo <=> root.codigo;
+        user <=> root.user;
+        empty_error <=> root.empty_error;
+        empty_error_text_color <=> root.empty_error_text_color;
 
         go_to_visualizeRoomAdmin => {
             root.pantalla_actual=5;
@@ -119,6 +130,10 @@ export component MainWindow inherits Window {
         go_to_createRoom => {
             root.pantalla_actual=6;
             root.navbarIndex = 2;
+        }
+
+        enviar_codigo => {
+            root.enviar_codigo();
         }
     }
 

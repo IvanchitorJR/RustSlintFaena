@@ -47,13 +47,7 @@ pub fn validar_usuario(username: &str, correo: &str, pswd: &str, confirm_pswd: &
     }
 }
 
-pub async fn registrar_usuario(
-    cliente: Arc<Client>,
-    username: String,
-    correo: String,
-    password: String,
-    ui_handle: Weak<MainWindow>
-){
+pub async fn registrar_usuario(cliente: Arc<Client>,username: String,correo: String,password: String,ui_handle: Weak<MainWindow>){
     let url="https://faena-backend.onrender.com/api/usuarios"; //url para la api rest con los usuarios
     match cliente.get(url).send().await{ //consulta de todos los usuarios para verificar correos
         Ok(res)=>{ //respuesta de GET
