@@ -1,4 +1,7 @@
+mod guardado_local;
+
 use crate::modelo::Usuario;
+use crate::guardado_local::guardar_usuario;
 use reqwest::Client;
 use std::sync::Arc;
 use slint::Weak;

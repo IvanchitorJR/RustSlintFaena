@@ -10,6 +10,14 @@ pub struct Usuario {
     pub premium: bool,
 }
 
+#[derive(Debug, Deserialize, Serialize)]
+// estructura de los usuarios en rust, posteriolmente se convierte en json
+pub struct UsuarioGuardado {
+    pub user: String,
+    pub email: String,
+    pub premium: bool,
+}
+
 #[derive(Serialize)]
 pub struct SalaVotacion {
     pub id: i32,
